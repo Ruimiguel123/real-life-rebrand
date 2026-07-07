@@ -1,5 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import {
+  CONTACT_WEBHOOK_URL,
+  KELLY_EMAIL,
+  isConfigured,
+} from "@/config/simplepractice";
 
 export const Route = createFileRoute("/lets-get-real")({
   head: () => ({
@@ -46,7 +51,47 @@ const posts = [
 
 function LetsGetReal() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
+
+  const subscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    if (!isConfigured(CONTACT_WEBHOOK_URL)) {
+      // No webhook yet — send the signup to Kelly's inbox so nothing is lost.
+      window.location.href = `mailto:${KELLY_EMAIL}?subject=${encodeURIComponent(
+        "Newsletter signup",
+      )}&body=${encodeURIComponent(`Please add me to the list: ${email}`)}`;
+      return;
+    }
+    setStatus("sending");
+    try {
+      const payload = JSON.stringify({
+        type: "newsletter",
+        email,
+        submittedAt: new Date().toISOString(),
+      });
+      try {
+        const res = await fetch(CONTACT_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+        });
+        if (!res.ok) throw new Error(String(res.status));
+      } catch {
+        await fetch(CONTACT_WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain" },
+          body: payload,
+        });
+      }
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  };
 
   return (
     <>
@@ -105,10 +150,7 @@ function LetsGetReal() {
 
           <form
             className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (email) setSubmitted(true);
-            }}
+            onSubmit={subscribe}
           >
             <input
               type="email"
@@ -120,15 +162,29 @@ function LetsGetReal() {
             />
             <button
               type="submit"
-              className="rounded-full bg-honey px-6 py-3 text-sm font-medium text-accent-foreground transition hover:brightness-95"
+              disabled={status === "sending" || status === "sent"}
+              className="rounded-full bg-honey px-6 py-3 text-sm font-medium text-accent-foreground transition hover:brightness-95 disabled:opacity-60"
             >
-              {submitted ? "Thank you" : "Sign up"}
+              {status === "sent"
+                ? "Thank you"
+                : status === "sending"
+                  ? "Signing up…"
+                  : "Sign up"}
             </button>
           </form>
 
-          {submitted && (
+          {status === "sent" && (
             <p className="mt-4 text-sm text-cream/70">
-              We'll be in touch soon.
+              You're on the list. We'll be in touch soon.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="mt-4 text-sm text-cream/70">
+              That didn't go through — try again, or email{" "}
+              <a href={`mailto:${KELLY_EMAIL}`} className="text-honey underline">
+                {KELLY_EMAIL}
+              </a>
+              .
             </p>
           )}
         </div>

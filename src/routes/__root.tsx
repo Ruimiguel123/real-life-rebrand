@@ -10,6 +10,25 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import { SITE_URL, KELLY_EMAIL } from "@/config/simplepractice";
+
+const practiceJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  name: "Real Life Healing",
+  description:
+    "Client-centered CBT, EMDR, trauma and grief counseling. Telehealth for individuals, couples, and families across Indiana.",
+  ...(SITE_URL ? { url: SITE_URL } : {}),
+  email: KELLY_EMAIL,
+  areaServed: { "@type": "State", name: "Indiana" },
+  medicalSpecialty: "Psychiatric",
+  founder: {
+    "@type": "Person",
+    name: "Kelly Day",
+    jobTitle: "Licensed Mental Health Counselor (LMHC, NCC)",
+  },
+  foundingDate: "2019",
+});
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -112,6 +131,10 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: practiceJsonLd }}
+        />
       </head>
       <body>
         {children}

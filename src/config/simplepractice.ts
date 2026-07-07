@@ -1,12 +1,24 @@
-// SimplePractice integration URLs.
-// Replace these with the real URLs from your SimplePractice account when ready.
-// Until then, buttons using these constants fall back to the email appointment
-// request (see BeginYourCare component).
+// ---------------------------------------------------------------
+// Site integrations — this is the ONLY file you need to edit
+// when Kelly hands over her real URLs.
+// ---------------------------------------------------------------
 
+// From SimplePractice: Settings → Client Portal → shareable link.
+// Booking URL = the "Request appointment" link for new clients.
+// Portal URL  = the client portal sign-in link for existing clients.
 export const SIMPLEPRACTICE_BOOKING_URL = "#";
 export const SIMPLEPRACTICE_PORTAL_URL = "#";
 
-export const APPOINTMENT_MAILTO =
-  "mailto:kelly.daylmhc@gmail.com?subject=Appointment%20Request&body=REQUESTED%20DATE%3A%0AREQUESTED%20TIME%3A%0AREASON%20FOR%20REQUEST%3A";
+// Make.com custom webhook. Handles BOTH the appointment form and the
+// newsletter signup — the payload includes a `type` field
+// ("appointment" | "newsletter") so a Router in Make can branch.
+export const CONTACT_WEBHOOK_URL = "";
 
-export const isConfigured = (url: string) => url && url !== "#";
+// Where appointment requests land if the webhook isn't set up yet.
+export const KELLY_EMAIL = "kelly.daylmhc@gmail.com";
+
+export const isConfigured = (url: string) => Boolean(url) && url !== "#";
+
+// Set this once the site has its real domain (e.g. "https://reallifehealing.info").
+// Used for canonical URLs and structured data. Leave "" until then.
+export const SITE_URL = "";
