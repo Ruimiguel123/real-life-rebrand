@@ -141,6 +141,8 @@ function Home() {
         </div>
       </section>
 
+      <InsuranceBanner />
+
       {/* Credentials */}
       <section className="bg-cream">
         <div className="mx-auto max-w-5xl px-6 py-24">
@@ -179,8 +181,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-      <InsuranceBanner />
 
       <BeginYourCare />
     </>
