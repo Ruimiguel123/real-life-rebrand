@@ -48,7 +48,7 @@ export function BeginYourCare() {
               Reach out to schedule an intake. We'll find a time that fits.
             </span>
             <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-honey px-5 py-2.5 text-sm font-medium text-accent-foreground transition group-hover:brightness-95">
-              Book now
+              Book now through email
               <span aria-hidden>→</span>
             </span>
           </a>
