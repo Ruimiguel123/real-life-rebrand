@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import heroSanctuary from "@/assets/hero-sanctuary.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
+import { InsuranceBanner } from "@/components/InsuranceBanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -178,6 +179,8 @@ function Home() {
           </div>
         </div>
       </section>
+
+      <InsuranceBanner />
 
       <BeginYourCare />
     </>

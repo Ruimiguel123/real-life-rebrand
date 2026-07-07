@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BeginYourCare } from "@/components/BeginYourCare";
+import { InsuranceBanner } from "@/components/InsuranceBanner";
 
 export const Route = createFileRoute("/getting-started")({
   head: () => ({
@@ -104,6 +105,8 @@ function GettingStarted() {
           </div>
         </div>
       </section>
+
+      <InsuranceBanner />
 
       <BeginYourCare />
     </>
