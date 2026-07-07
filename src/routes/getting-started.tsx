@@ -58,6 +58,8 @@ function GettingStarted() {
         </div>
       </section>
 
+      <InsuranceBanner />
+
       <section className="bg-sand/60">
         <div className="mx-auto max-w-6xl px-6 py-24">
           <div className="grid gap-6 md:grid-cols-3">
@@ -105,8 +107,6 @@ function GettingStarted() {
           </div>
         </div>
       </section>
-
-      <InsuranceBanner />
 
       <BeginYourCare />
     </>
