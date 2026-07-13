@@ -15,7 +15,7 @@ export function SiteHeader() {
           />
           <span className="flex flex-col leading-tight">
             <span className="font-display text-lg text-evergreen">
-              Real Life Healing
+              Real. Life Healing
             </span>
             <span className="font-sans text-[0.65rem] uppercase tracking-[0.22em] text-forest/70">
               Mental Health Counseling
@@ -27,6 +27,7 @@ export function SiteHeader() {
           <NavLink to="/">Home</NavLink>
           <NavLink to="/getting-started">Getting Started</NavLink>
           <NavLink to="/lets-get-real">Let's Get Real</NavLink>
+          <NavLink to="/links">Links</NavLink>
         </nav>
 
         <Link
