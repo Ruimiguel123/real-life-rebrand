@@ -126,7 +126,6 @@ function Home() {
             {[
               "Individuals, couples, and families",
               "Cognitive Behavioral Therapy (CBT)",
-              "EMDR for PTSD & Trauma",
               "Grief & bereavement counseling",
               "Trauma-informed care",
               "Multiculturally sensitive counseling",
