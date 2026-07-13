@@ -35,7 +35,7 @@ export function InsuranceBanner() {
         <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
           Insurance accepted
         </p>
-        <h2 className="mt-4 font-serif text-3xl md:text-4xl">
+        <h2 className="mt-4 font-serif text-4xl md:text-5xl">
           Kelly works with your budget
         </h2>
         <p className="mx-auto mt-4 max-w-2xl font-serif text-lg text-cream/85">

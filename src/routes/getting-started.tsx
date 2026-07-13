@@ -88,7 +88,7 @@ function GettingStarted() {
       <section className="bg-cream">
         <div className="mx-auto grid max-w-5xl gap-12 px-6 py-24 md:grid-cols-2">
           <div>
-            <h2 className="font-serif text-3xl text-evergreen">
+            <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
               Who I work with
             </h2>
             <p className="mt-4 text-forest">
@@ -100,7 +100,7 @@ function GettingStarted() {
             </p>
           </div>
           <div>
-            <h2 className="font-serif text-3xl text-evergreen">
+            <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
               What sessions look like
             </h2>
             <p className="mt-4 text-forest">

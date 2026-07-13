@@ -143,7 +143,7 @@ function LetsGetReal() {
           <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
             Stay in touch
           </p>
-          <h2 className="mt-4 font-serif text-4xl">
+          <h2 className="mt-4 font-serif text-4xl md:text-5xl">
             Subscribe for updates & resources
           </h2>
           <p className="mt-4 font-serif text-lg italic text-cream/80">

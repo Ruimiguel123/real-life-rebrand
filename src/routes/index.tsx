@@ -41,7 +41,7 @@ function Home() {
 
         <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
           <div>
-            <p className="font-display text-sm uppercase tracking-[0.32em] text-honey">
+            <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
               Real. Life Healing
             </p>
             <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
@@ -146,20 +146,21 @@ function Home() {
 
       {/* Virtual Counseling */}
       <section className="bg-cream">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:items-center">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-28 md:grid-cols-[1.2fr_1fr] md:items-center md:py-32">
           <div>
             <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
               Virtual counseling
             </p>
-            <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
-              Care from the comfort of your own space.
+            <h2 className="mt-4 font-serif text-5xl leading-[1.05] text-evergreen md:text-6xl">
+              Care from the comfort of your{" "}
+              <em className="text-honey">own space</em>.
             </h2>
-            <p className="mt-6 font-serif text-lg leading-relaxed text-forest">
+            <p className="mt-8 font-serif text-xl leading-relaxed text-forest md:text-2xl">
               My goal is to create an environment that makes you feel as
               comfortable as possible, while practicing HIPAA-compliant
               security.
             </p>
-            <p className="mt-4 font-serif text-lg leading-relaxed text-forest">
+            <p className="mt-4 font-serif text-xl leading-relaxed text-forest md:text-2xl">
               I offer all sessions virtually to encourage clients to utilize
               the comfort of their environment.
             </p>
@@ -211,7 +212,7 @@ function Home() {
               <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
                 Meet your therapist
               </p>
-              <h2 className="mt-4 font-serif text-4xl text-evergreen">
+              <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
                 Kelly Day, <span className="italic">LMHC, NCC</span>
               </h2>
               <p className="mt-4 text-sm text-forest/80">
