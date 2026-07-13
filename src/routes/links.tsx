@@ -10,7 +10,6 @@ import {
 export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
-      { property: "og:url", content: "https://reallifehealing.info/links" },
       { title: "Links — Real. Life Healing" },
       {
         name: "description",
@@ -19,7 +18,6 @@ export const Route = createFileRoute("/links")({
       },
       { property: "og:title", content: "Links — Real. Life Healing" },
     ],
-    links: [{ rel: "canonical", href: "https://reallifehealing.info/links" }],
   }),
   component: LinksPage,
 });
@@ -192,7 +190,7 @@ function LinksPage() {
           href="/"
           className="mt-8 text-xs uppercase tracking-[0.22em] text-cream/50 hover:text-cream/80"
         >
-          reallifehealing.info
+          reallifehealing.com
         </a>
       </div>
     </section>
