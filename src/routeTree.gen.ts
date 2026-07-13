@@ -9,10 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LinksRouteImport } from './routes/links'
 import { Route as LetsGetRealRouteImport } from './routes/lets-get-real'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
 import { Route as IndexRouteImport } from './routes/index'
 
+const LinksRoute = LinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LetsGetRealRoute = LetsGetRealRouteImport.update({
   id: '/lets-get-real',
   path: '/lets-get-real',
@@ -33,34 +39,45 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
   '/lets-get-real': typeof LetsGetRealRoute
+  '/links': typeof LinksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
   '/lets-get-real': typeof LetsGetRealRoute
+  '/links': typeof LinksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
   '/lets-get-real': typeof LetsGetRealRoute
+  '/links': typeof LinksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/getting-started' | '/lets-get-real'
+  fullPaths: '/' | '/getting-started' | '/lets-get-real' | '/links'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/getting-started' | '/lets-get-real'
-  id: '__root__' | '/' | '/getting-started' | '/lets-get-real'
+  to: '/' | '/getting-started' | '/lets-get-real' | '/links'
+  id: '__root__' | '/' | '/getting-started' | '/lets-get-real' | '/links'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GettingStartedRoute: typeof GettingStartedRoute
   LetsGetRealRoute: typeof LetsGetRealRoute
+  LinksRoute: typeof LinksRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/links': {
+      id: '/links'
+      path: '/links'
+      fullPath: '/links'
+      preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lets-get-real': {
       id: '/lets-get-real'
       path: '/lets-get-real'
@@ -89,7 +106,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GettingStartedRoute: GettingStartedRoute,
   LetsGetRealRoute: LetsGetRealRoute,
+  LinksRoute: LinksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
