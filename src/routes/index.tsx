@@ -145,6 +145,63 @@ function Home() {
         </div>
       </section>
 
+      {/* Virtual Counseling */}
+      <section className="bg-cream">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:items-center">
+          <div>
+            <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+              Virtual counseling
+            </p>
+            <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
+              Care from the comfort of your own space.
+            </h2>
+            <p className="mt-6 font-serif text-lg leading-relaxed text-forest">
+              My goal is to create an environment that makes you feel as
+              comfortable as possible, while practicing HIPAA-compliant
+              security.
+            </p>
+            <p className="mt-4 font-serif text-lg leading-relaxed text-forest">
+              I offer all sessions virtually to encourage clients to utilize
+              the comfort of their environment.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                title: "Individual sessions",
+                note: "Adults only",
+              },
+              {
+                title: "Family & group sessions",
+                note: "Available now",
+              },
+              {
+                title: "Immediate openings",
+                note: "No waitlist",
+              },
+              {
+                title: "Ages 16 and up",
+                note: "Teens welcome in family sessions",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl bg-sand/60 p-6 text-evergreen"
+              >
+                <span className="flex h-2 w-2 rounded-full bg-honey" />
+                <p className="mt-3 font-serif text-lg leading-snug">
+                  {item.title}
+                </p>
+                <p className="mt-1 text-xs uppercase tracking-[0.18em] text-forest/70">
+                  {item.note}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <InsuranceBanner />
 
       {/* Credentials */}
