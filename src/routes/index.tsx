@@ -7,18 +7,20 @@ import { InsuranceBanner } from "@/components/InsuranceBanner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Real Life Healing — Therapy & Counseling in Indiana" },
+      { property: "og:url", content: "https://reallifehealing.info/" },
+      { title: "Real. Life Healing — Therapy & Counseling in Indiana" },
       {
         name: "description",
         content:
           "Client-centered CBT, EMDR, trauma and grief counseling with Kelly Day, LMHC, NCC. Real, affordable telehealth for individuals, couples, and families across Indiana.",
       },
-      { property: "og:title", content: "Real Life Healing — Therapy in Indiana" },
+      { property: "og:title", content: "Real. Life Healing — Therapy in Indiana" },
       {
         property: "og:description",
         content: "Healing happens in real life. Warm, sincere therapy since 2019.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://reallifehealing.info/" }],
   }),
   component: Home,
 });
@@ -40,7 +42,7 @@ function Home() {
         <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
           <div>
             <p className="font-display text-sm uppercase tracking-[0.32em] text-honey">
-              Real Life Healing
+              Real. Life Healing
             </p>
             <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
               Healing happens in <em className="text-honey not-italic md:italic">real life</em>.

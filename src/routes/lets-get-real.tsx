@@ -9,18 +9,20 @@ import {
 export const Route = createFileRoute("/lets-get-real")({
   head: () => ({
     meta: [
-      { title: "Let's Get Real — Real Life Healing" },
+      { property: "og:url", content: "https://reallifehealing.info/lets-get-real" },
+      { title: "Let's Get Real — Real. Life Healing" },
       {
         name: "description",
         content:
           "Notes, updates, and honest reflections on therapy, healing, and real life — from Kelly Day, LMHC.",
       },
-      { property: "og:title", content: "Let's Get Real — Real Life Healing" },
+      { property: "og:title", content: "Let's Get Real — Real. Life Healing" },
       {
         property: "og:description",
         content: "Honest notes on therapy, healing, and real life.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://reallifehealing.info/lets-get-real" }],
   }),
   component: LetsGetReal,
 });

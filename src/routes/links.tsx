@@ -10,6 +10,7 @@ import {
 export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
+      { property: "og:url", content: "https://reallifehealing.info/links" },
       { title: "Links — Real. Life Healing" },
       {
         name: "description",
@@ -18,6 +19,7 @@ export const Route = createFileRoute("/links")({
       },
       { property: "og:title", content: "Links — Real. Life Healing" },
     ],
+    links: [{ rel: "canonical", href: "https://reallifehealing.info/links" }],
   }),
   component: LinksPage,
 });
@@ -42,6 +44,11 @@ const socials = [
     label: "TikTok",
     handle: "@_real.life_healing",
     href: "https://www.tiktok.com/@_real.life_healing",
+  },
+  {
+    label: "Amazon Storefront",
+    handle: "Kelly's healing finds",
+    href: "https://www.amazon.com/shop/k-mo",
   },
 ];
 
@@ -185,7 +192,7 @@ function LinksPage() {
           href="/"
           className="mt-8 text-xs uppercase tracking-[0.22em] text-cream/50 hover:text-cream/80"
         >
-          reallifehealing.com
+          reallifehealing.info
         </a>
       </div>
     </section>

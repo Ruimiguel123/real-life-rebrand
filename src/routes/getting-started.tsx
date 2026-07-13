@@ -5,18 +5,20 @@ import { InsuranceBanner } from "@/components/InsuranceBanner";
 export const Route = createFileRoute("/getting-started")({
   head: () => ({
     meta: [
-      { title: "Getting Started — Real Life Healing" },
+      { property: "og:url", content: "https://reallifehealing.info/getting-started" },
+      { title: "Getting Started — Real. Life Healing" },
       {
         name: "description",
         content:
-          "How to begin therapy with Real Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in Indiana.",
+          "How to begin therapy with Real. Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in Indiana.",
       },
-      { property: "og:title", content: "Getting Started — Real Life Healing" },
+      { property: "og:title", content: "Getting Started — Real. Life Healing" },
       {
         property: "og:description",
         content: "Three simple steps to begin affordable telehealth therapy in Indiana.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://reallifehealing.info/getting-started" }],
   }),
   component: GettingStarted,
 });
@@ -51,7 +53,7 @@ function GettingStarted() {
             A gentle way to <em>begin</em>.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl font-serif text-lg text-forest">
-            Beginning therapy can feel like a lot. Real Life Healing keeps it
+            Beginning therapy can feel like a lot. Real. Life Healing keeps it
             simple, warm, and affordable — telehealth care built around your
             real life.
           </p>

@@ -21,4 +21,4 @@ export const isConfigured = (url: string) => Boolean(url) && url !== "#";
 
 // Set this once the site has its real domain (e.g. "https://reallifehealing.info").
 // Used for canonical URLs and structured data. Leave "" until then.
-export const SITE_URL = "";
+export const SITE_URL = "https://reallifehealing.info";
