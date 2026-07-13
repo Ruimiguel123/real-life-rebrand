@@ -13,7 +13,7 @@ export function BeginYourCare() {
     <section id="begin" className="scroll-mt-24 bg-evergreen text-cream">
       <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
         <div className="text-center">
-          <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+          <p className="font-display text-sm uppercase tracking-[0.3em] text-honey">
             Let's get real
           </p>
           <h2 className="mt-4 font-serif text-4xl md:text-5xl">
