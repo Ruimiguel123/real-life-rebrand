@@ -46,7 +46,7 @@ function GettingStarted() {
     <>
       <section className="bg-cream">
         <div className="mx-auto max-w-4xl px-6 py-24 text-center">
-          <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+          <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
             Getting started
           </p>
           <h1 className="mt-6 font-serif text-5xl text-evergreen md:text-6xl">

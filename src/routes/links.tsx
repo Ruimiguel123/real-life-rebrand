@@ -106,7 +106,7 @@ function LinksPage() {
           height={72}
           className="h-16 w-16 object-contain"
         />
-        <p className="mt-5 font-display text-xs uppercase tracking-[0.3em] text-honey">
+        <p className="mt-5 font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
           Real. Life Healing
         </p>
         <h1 className="mt-3 font-serif text-3xl italic">

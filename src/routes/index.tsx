@@ -41,7 +41,7 @@ function Home() {
 
         <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1.2fr_1fr] md:py-32">
           <div>
-            <p className="font-display text-sm uppercase tracking-[0.32em] text-honey">
+            <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
               Real. Life Healing
             </p>
             <h1 className="mt-6 font-serif text-5xl leading-[1.05] md:text-7xl">
@@ -90,7 +90,7 @@ function Home() {
       {/* Mission */}
       <section className="bg-cream">
         <div className="mx-auto max-w-4xl px-6 py-24 text-center">
-          <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+          <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
             Mission
           </p>
           <p className="mt-8 font-serif text-2xl leading-relaxed text-evergreen md:text-3xl">
@@ -105,7 +105,7 @@ function Home() {
       <section className="bg-sand/60">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2 md:items-center">
           <div>
-            <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+            <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
               Approach
             </p>
             <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
@@ -151,7 +151,7 @@ function Home() {
             <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
               Virtual counseling
             </p>
-            <h2 className="mt-4 font-serif text-5xl leading-[1.05] text-evergreen md:text-6xl">
+            <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
               Care from the comfort of your{" "}
               <em className="text-honey">own space</em>.
             </h2>
@@ -209,7 +209,7 @@ function Home() {
         <div className="mx-auto max-w-5xl px-6 py-24">
           <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
             <div>
-              <p className="font-display text-xs uppercase tracking-[0.32em] text-honey">
+              <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
                 Meet your therapist
               </p>
               <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
