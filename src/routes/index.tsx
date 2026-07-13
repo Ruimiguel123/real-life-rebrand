@@ -129,6 +129,8 @@ function Home() {
               "EMDR for PTSD & Trauma",
               "Grief & bereavement counseling",
               "Trauma-informed care",
+              "Multiculturally sensitive counseling",
+              "LGBTQ+ & gender-affirming care",
               "Secure, private telehealth",
             ].map((item) => (
               <li

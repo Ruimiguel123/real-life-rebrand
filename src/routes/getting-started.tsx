@@ -94,7 +94,9 @@ function GettingStarted() {
             <p className="mt-4 text-forest">
               Individuals, couples, and families across Indiana experiencing
               emotional or psychological difficulties — anxiety, depression,
-              trauma, grief, and relationship strain.
+              trauma, grief, and relationship strain. The practice is
+              multiculturally sensitive and gender-affirming; people of every
+              background and identity are welcome here.
             </p>
           </div>
           <div>
