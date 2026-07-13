@@ -16,7 +16,7 @@ export function InsuranceBanner() {
           Insurance accepted
         </p>
         <h2 className="mt-4 font-serif text-3xl md:text-4xl">
-          Kelly works with your insurance
+          Kelly works with your budget
         </h2>
         <p className="mx-auto mt-4 max-w-2xl font-serif text-lg text-cream/85">
           Real. Life Healing is an in-network provider with major carriers. Coverage

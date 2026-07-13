@@ -15,11 +15,12 @@ import { SITE_URL, KELLY_EMAIL } from "@/config/simplepractice";
 const practiceJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
-  name: "Real Life Healing",
+  name: "Real. Life Healing",
   description:
     "Client-centered CBT, EMDR, trauma and grief counseling. Telehealth for individuals, couples, and families across Indiana.",
   ...(SITE_URL ? { url: SITE_URL } : {}),
   email: KELLY_EMAIL,
+  telephone: "+1-317-918-3195",
   areaServed: { "@type": "State", name: "Indiana" },
   medicalSpecialty: "Psychiatric",
   founder: {
@@ -98,15 +99,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Real Life Healing — Therapy & Counseling in Indiana" },
+      { title: "Real. Life Healing — Therapy & Counseling in Indiana" },
       {
         name: "description",
         content:
           "Real, affordable therapy with Kelly Day, LMHC, NCC. Client-centered CBT, EMDR, trauma and grief counseling for individuals, couples, and families across Indiana.",
       },
-      { name: "author", content: "Real Life Healing" },
+      { name: "author", content: "Real. Life Healing" },
       { name: "theme-color", content: "#344338" },
-      { property: "og:title", content: "Real Life Healing — Therapy & Counseling in Indiana" },
+      { property: "og:title", content: "Real. Life Healing — Therapy & Counseling in Indiana" },
       {
         property: "og:description",
         content:
