@@ -187,7 +187,7 @@ function Home() {
             {[
               {
                 title: "Individual sessions",
-                note: "Adults only",
+                note: "Ages 16+",
               },
               {
                 title: "Family & group sessions",
@@ -198,8 +198,8 @@ function Home() {
                 note: "No waitlist",
               },
               {
-                title: "Ages 16 and up",
-                note: "Teens welcome in family sessions",
+                title: "Available 24/7",
+                note: "Book online anytime",
               },
             ].map((item) => (
               <div

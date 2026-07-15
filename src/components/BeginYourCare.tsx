@@ -4,6 +4,7 @@ import {
   isConfigured,
 } from "@/config/simplepractice";
 import { AppointmentForm } from "@/components/AppointmentForm";
+import { SimplePracticeWidget } from "@/components/SimplePracticeWidget";
 
 export function BeginYourCare() {
   const bookingLive = isConfigured(SIMPLEPRACTICE_BOOKING_URL);
@@ -65,23 +66,15 @@ export function BeginYourCare() {
             </a>
 
             {bookingLive && (
-              <a
-                href={SIMPLEPRACTICE_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col rounded-2xl border border-honey/40 bg-evergreen p-8 text-cream shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
-              >
+              <div className="flex flex-col rounded-2xl border border-honey/40 bg-evergreen p-8 text-cream shadow-sm">
                 <span className="text-xs uppercase tracking-[0.22em] text-cream/60">
                   Prefer to self-schedule?
                 </span>
                 <span className="mt-3 font-serif text-2xl">
                   Book online through SimplePractice
                 </span>
-                <span className="mt-6 inline-flex items-center gap-2 self-start rounded-full bg-honey px-5 py-2.5 text-sm font-medium text-accent-foreground transition group-hover:brightness-95">
-                  Choose a time
-                  <span aria-hidden>→</span>
-                </span>
-              </a>
+                <SimplePracticeWidget className="mt-6 self-start" />
+              </div>
             )}
           </div>
         </div>
