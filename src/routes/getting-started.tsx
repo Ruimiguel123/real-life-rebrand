@@ -106,7 +106,7 @@ function GettingStarted() {
             </h2>
             <p className="mt-4 text-forest">
               Secure video telehealth from anywhere in Indiana. Sessions
-              typically run 50 minutes. We use CBT as our foundation, adding
+              typically run 45 to 60 minutes. We use CBT as our foundation, adding
               EMDR or trauma-informed approaches when they'll help you most.
             </p>
           </div>
