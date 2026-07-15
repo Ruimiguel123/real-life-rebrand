@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import beautifulDestinations from "@/assets/beautiful-destinations.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
 
@@ -86,7 +87,7 @@ function GettingStarted() {
       </section>
 
       <section className="bg-cream">
-        <div className="mx-auto grid max-w-5xl gap-12 px-6 py-24 md:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1fr_0.8fr] md:items-center">
           <div>
             <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
               Who I work with
@@ -109,6 +110,12 @@ function GettingStarted() {
               EMDR or trauma-informed approaches when they'll help you most.
             </p>
           </div>
+          <img
+            src={beautifulDestinations}
+            alt="Letter board reading 'difficult roads lead to beautiful destinations' beside a young plant"
+            className="h-72 w-full rounded-3xl object-cover shadow-sm md:h-96"
+            loading="lazy"
+          />
         </div>
       </section>
 

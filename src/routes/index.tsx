@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import heroSanctuary from "@/assets/hero-sanctuary.jpg";
+import stonesBalance from "@/assets/stones-balance.jpg";
+import ownSpace from "@/assets/own-space.jpg";
+import reachingHands from "@/assets/reaching-hands.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
 
@@ -89,15 +92,23 @@ function Home() {
 
       {/* Mission */}
       <section className="bg-cream">
-        <div className="mx-auto max-w-4xl px-6 py-24 text-center">
-          <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
-            Mission
-          </p>
-          <p className="mt-8 font-serif text-2xl leading-relaxed text-evergreen md:text-3xl">
-            To provide high-quality counseling to individuals, couples, and
-            families experiencing emotional or psychological difficulties — with
-            warmth, respect, and care.
-          </p>
+        <div className="mx-auto grid max-w-5xl items-center gap-12 px-6 py-24 md:grid-cols-[2fr_3fr]">
+          <img
+            src={stonesBalance}
+            alt="River stones stacked in balance beside the water"
+            className="h-80 w-full rounded-3xl object-cover shadow-sm md:h-[26rem]"
+            loading="lazy"
+          />
+          <div>
+            <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
+              Mission
+            </p>
+            <p className="mt-8 font-serif text-2xl leading-relaxed text-evergreen md:text-3xl">
+              To provide high-quality counseling to individuals, couples, and
+              families experiencing emotional or psychological difficulties — with
+              warmth, respect, and care.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -164,6 +175,12 @@ function Home() {
               I offer all sessions virtually to encourage clients to utilize
               the comfort of their environment.
             </p>
+            <img
+              src={ownSpace}
+              alt="Person sitting quietly by a bright window at home"
+              className="mt-8 h-56 w-full rounded-2xl object-cover shadow-sm md:h-64"
+              loading="lazy"
+            />
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -219,6 +236,12 @@ function Home() {
                 Dedicated to helping clients achieve their goals and improve
                 their mental health and well-being.
               </p>
+              <img
+                src={reachingHands}
+                alt="Two hands reaching toward each other against an open sky"
+                className="mt-8 hidden h-64 w-full rounded-2xl object-cover shadow-sm md:block"
+                loading="lazy"
+              />
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">

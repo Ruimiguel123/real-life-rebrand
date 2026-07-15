@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import ripples from "@/assets/ripples.jpg";
 import { useState } from "react";
 import {
   CONTACT_WEBHOOK_URL,
@@ -135,6 +136,17 @@ function LetsGetReal() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="bg-sand/50 pb-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <img
+            src={ripples}
+            alt="Gentle ripples spreading across calm water"
+            className="h-56 w-full rounded-3xl object-cover shadow-sm md:h-72"
+            loading="lazy"
+          />
         </div>
       </section>
 
