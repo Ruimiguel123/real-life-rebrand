@@ -15,7 +15,7 @@ export const Route = createFileRoute("/lets-get-real")({
       {
         name: "description",
         content:
-          "Notes, updates, and honest reflections on therapy, healing, and real life — from Kelly Day, LMHC.",
+          "Honest notes on therapy and healing from Kelly Day, LMHC — plus practice updates and mental health resources for Indiana.",
       },
       { property: "og:title", content: "Let's Get Real — Real. Life Healing" },
       {
@@ -144,6 +144,8 @@ function LetsGetReal() {
           <img
             src={ripples}
             alt="Gentle ripples spreading across calm water"
+            width={1800}
+            height={1200}
             className="h-56 w-full rounded-3xl object-cover shadow-sm md:h-72"
             loading="lazy"
           />

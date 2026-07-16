@@ -15,12 +15,16 @@ import { SITE_URL, KELLY_EMAIL } from "@/config/simplepractice";
 const practiceJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
+  "@id": "https://reallifehealing.info/#practice",
   name: "Real. Life Healing",
   description:
-    "Client-centered CBT, EMDR, trauma and grief counseling. Telehealth for individuals, couples, and families across Indiana.",
-  ...(SITE_URL ? { url: SITE_URL } : {}),
+    "Client-centered CBT, trauma and grief counseling. Real, affordable telehealth for individuals, couples, and families across Indiana.",
+  url: SITE_URL || "https://reallifehealing.info",
+  logo: "https://reallifehealing.info/apple-touch-icon.png",
+  image: "https://reallifehealing.info/og-image.jpg",
   email: KELLY_EMAIL,
   telephone: "+1-317-918-3195",
+  priceRange: "$$",
   areaServed: { "@type": "State", name: "Indiana" },
   medicalSpecialty: "Psychiatric",
   founder: {
@@ -29,6 +33,12 @@ const practiceJsonLd = JSON.stringify({
     jobTitle: "Licensed Mental Health Counselor (LMHC, NCC)",
   },
   foundingDate: "2019",
+  sameAs: [
+    "https://www.instagram.com/_reallifehealing_",
+    "https://www.facebook.com/profile.php?id=100088250803218",
+    "https://youtube.com/@reallifewithkmo",
+    "https://www.tiktok.com/@_real.life_healing",
+  ],
 });
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -107,6 +117,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "Real. Life Healing" },
       { name: "theme-color", content: "#344338" },
+      { property: "og:image", content: "https://reallifehealing.info/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Real. Life Healing — online therapy in Indiana" },
+      { name: "twitter:image", content: "https://reallifehealing.info/og-image.jpg" },
       { property: "og:title", content: "Real. Life Healing — Therapy & Counseling in Indiana" },
       {
         property: "og:description",

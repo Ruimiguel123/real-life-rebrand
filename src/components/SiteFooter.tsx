@@ -15,7 +15,7 @@ export function SiteFooter() {
         </div>
 
         <div className="text-sm text-cream/80">
-          <h4 className="font-serif text-cream text-lg">Practice</h4>
+          <p className="font-serif text-cream text-lg">Practice</p>
           <ul className="mt-4 space-y-2">
             <li><Link to="/" className="hover:text-honey">Home</Link></li>
             <li><Link to="/getting-started" className="hover:text-honey">Getting Started</Link></li>
@@ -25,7 +25,7 @@ export function SiteFooter() {
         </div>
 
         <div className="text-sm text-cream/80">
-          <h4 className="font-serif text-cream text-lg">Kelly Day, LMHC, NCC</h4>
+          <p className="font-serif text-cream text-lg">Kelly Day, LMHC, NCC</p>
           <p className="mt-4">Telehealth for the State of Indiana</p>
           <p className="mt-2">Serving clients since 2019</p>
           <a

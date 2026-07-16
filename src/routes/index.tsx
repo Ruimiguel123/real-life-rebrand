@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Client-centered CBT, EMDR, trauma and grief counseling with Kelly Day, LMHC, NCC. Real, affordable telehealth for individuals, couples, and families across Indiana.",
+          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered CBT, trauma and grief counseling — affordable telehealth for individuals, couples, and families. Ages 16+.",
       },
       { property: "og:title", content: "Real. Life Healing — Therapy in Indiana" },
       {
@@ -35,7 +35,7 @@ function Home() {
       <section className="relative overflow-hidden bg-evergreen text-cream">
         <img
           src={heroSanctuary}
-          alt=""
+          alt="A calm therapy space with warm natural light"
           width={1600}
           height={1000}
           className="absolute inset-0 h-full w-full object-cover opacity-40"
@@ -96,6 +96,8 @@ function Home() {
           <img
             src={stonesBalance}
             alt="River stones stacked in balance beside the water"
+            width={933}
+            height={1400}
             className="h-80 w-full rounded-3xl object-cover shadow-sm md:h-[26rem]"
             loading="lazy"
           />
@@ -160,7 +162,7 @@ function Home() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:items-center">
           <div>
             <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
-              Virtual counseling
+              Online therapy in Indiana
             </p>
             <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
               Care from the comfort of your{" "}
@@ -178,6 +180,8 @@ function Home() {
             <img
               src={ownSpace}
               alt="Person sitting quietly by a bright window at home"
+              width={1600}
+              height={1067}
               className="mt-8 h-56 w-full rounded-2xl object-cover shadow-sm md:h-64"
               loading="lazy"
             />
@@ -239,6 +243,8 @@ function Home() {
               <img
                 src={reachingHands}
                 alt="Two hands reaching toward each other against an open sky"
+                width={1050}
+                height={1400}
                 className="mt-8 hidden h-64 w-full rounded-2xl object-cover shadow-sm md:block"
                 loading="lazy"
               />

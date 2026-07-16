@@ -3,11 +3,44 @@ import beautifulDestinations from "@/assets/beautiful-destinations.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
 
+const faqs = [
+  {
+    q: "Does insurance cover online therapy in Indiana?",
+    a: "In most cases, yes. Real. Life Healing is in-network with Aetna, Anthem Blue Cross Blue Shield, United HealthCare, Optum, and Skai BCBS, and works with Employee Assistance Programs including Anthem EAP. Coverage is verified before your first session so there are no surprises.",
+  },
+  {
+    q: "What if I don't have insurance?",
+    a: "Kelly offers reduced-fee sessions through Open Path Collective, a nonprofit network for affordable therapy. Reach out and we'll find a rate that works with your budget.",
+  },
+  {
+    q: "What ages do you work with?",
+    a: "Individual sessions are available for ages 16 and up. Family and group sessions are also available.",
+  },
+  {
+    q: "Is online therapy as effective as meeting in person?",
+    a: "For many concerns — including anxiety, depression, grief, and trauma — research has found telehealth therapy comparably effective to in-person care. Many clients find it easier to open up from the comfort of their own space.",
+  },
+  {
+    q: "Is my session private?",
+    a: "Yes. Sessions take place over a secure, HIPAA-compliant video platform through SimplePractice, and scheduling and messaging happen through the same protected client portal.",
+  },
+];
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+});
+
 export const Route = createFileRoute("/getting-started")({
   head: () => ({
     meta: [
       { property: "og:url", content: "https://reallifehealing.info/getting-started" },
-      { title: "Getting Started — Real. Life Healing" },
+      { title: "Getting Started — Online Therapy in Indiana | Real. Life Healing" },
       {
         name: "description",
         content:
@@ -90,7 +123,7 @@ function GettingStarted() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1fr_0.8fr] md:items-center">
           <div>
             <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
-              Who I work with
+              Who I work with — telehealth counseling across Indiana
             </h2>
             <p className="mt-4 text-forest">
               Individuals, couples, and families across Indiana experiencing
@@ -105,7 +138,7 @@ function GettingStarted() {
               What sessions look like
             </h2>
             <p className="mt-4 text-forest">
-              Secure video telehealth from anywhere in Indiana. Sessions
+              Secure video telehealth from anywhere in Indiana — Indianapolis, Fort Wayne, Evansville, South Bend, Bloomington, and every community between. Sessions
               typically run 45 to 60 minutes. We use CBT as our foundation, adding
               EMDR or trauma-informed approaches when they'll help you most.
             </p>
@@ -113,10 +146,51 @@ function GettingStarted() {
           <img
             src={beautifulDestinations}
             alt="Letter board reading 'difficult roads lead to beautiful destinations' beside a young plant"
+            width={1147}
+            height={1400}
             className="h-72 w-full rounded-3xl object-cover shadow-sm md:h-96"
             loading="lazy"
           />
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="bg-cream">
+        <div className="mx-auto max-w-3xl px-6 py-24">
+          <p className="text-center font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
+            Common questions
+          </p>
+          <h2 className="mt-4 text-center font-serif text-3xl text-evergreen md:text-4xl">
+            Frequently asked questions
+          </h2>
+          <div className="mt-10 flex flex-col gap-3">
+            {faqs.map((f) => (
+              <details
+                key={f.q}
+                className="group rounded-2xl bg-sand/60 px-6 py-4 text-evergreen"
+              >
+                <summary className="cursor-pointer list-none font-serif text-lg marker:content-none">
+                  <span className="flex items-center justify-between gap-4">
+                    {f.q}
+                    <span
+                      aria-hidden
+                      className="text-honey transition group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-forest">
+                  {f.a}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+        />
       </section>
 
       <BeginYourCare />
