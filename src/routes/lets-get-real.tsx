@@ -11,13 +11,13 @@ export const Route = createFileRoute("/lets-get-real")({
   head: () => ({
     meta: [
       { property: "og:url", content: "https://reallifehealing.info/lets-get-real" },
-      { title: "Let's Get Real — Real. Life Healing" },
+      { title: "Let's Get Real | Real. Life Healing" },
       {
         name: "description",
         content:
-          "Honest notes on therapy and healing from Kelly Day, LMHC — plus practice updates and mental health resources for Indiana.",
+          "Honest notes on therapy and healing from Kelly Day, LMHC, plus practice updates and mental health resources for Indiana.",
       },
-      { property: "og:title", content: "Let's Get Real — Real. Life Healing" },
+      { property: "og:title", content: "Let's Get Real | Real. Life Healing" },
       {
         property: "og:description",
         content: "Honest notes on therapy, healing, and real life.",
@@ -33,7 +33,7 @@ const posts = [
     tag: "On practice",
     title: "What client-centered actually means",
     excerpt:
-      "A short note on why your goals shape the work — not the other way around.",
+      "A short note on why your goals shape the work, not the other way around.",
     date: "Coming soon",
   },
   {
@@ -62,7 +62,7 @@ function LetsGetReal() {
     e.preventDefault();
     if (!email) return;
     if (!isConfigured(CONTACT_WEBHOOK_URL)) {
-      // No webhook yet — send the signup to Kelly's inbox so nothing is lost.
+      // No webhook yet - send the signup to Kelly's inbox so nothing is lost.
       window.location.href = `mailto:${KELLY_EMAIL}?subject=${encodeURIComponent(
         "Newsletter signup",
       )}&body=${encodeURIComponent(`Please add me to the list: ${email}`)}`;
@@ -107,7 +107,7 @@ function LetsGetReal() {
             Let's get <em>real</em>.
           </h1>
           <p className="mx-auto mt-6 max-w-2xl font-serif text-lg text-forest">
-            Honest notes on therapy, healing, and everyday life — plus updates,
+            Honest notes on therapy, healing, and everyday life, plus updates,
             resources, and the occasional package deal.
           </p>
         </div>
@@ -161,7 +161,7 @@ function LetsGetReal() {
             Subscribe for updates & resources
           </h2>
           <p className="mt-4 font-serif text-lg italic text-cream/80">
-            Occasional notes — never spam.
+            Occasional notes, never spam.
           </p>
 
           <form
@@ -196,7 +196,7 @@ function LetsGetReal() {
           )}
           {status === "error" && (
             <p className="mt-4 text-sm text-cream/70">
-              That didn't go through — try again, or email{" "}
+              That didn't go through. Try again, or email{" "}
               <a href={`mailto:${KELLY_EMAIL}`} className="text-honey underline">
                 {KELLY_EMAIL}
               </a>

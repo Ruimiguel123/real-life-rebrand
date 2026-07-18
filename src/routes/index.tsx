@@ -11,13 +11,13 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { property: "og:url", content: "https://reallifehealing.info/" },
-      { title: "Real. Life Healing — Therapy & Counseling in Indiana" },
+      { title: "Real. Life Healing | Therapy & Counseling in Indiana" },
       {
         name: "description",
         content:
-          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered CBT, trauma and grief counseling — affordable telehealth for individuals, couples, and families. Ages 16+.",
+          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered CBT, trauma and grief counseling. Affordable telehealth for individuals, couples, and families. Ages 16+.",
       },
-      { property: "og:title", content: "Real. Life Healing — Therapy in Indiana" },
+      { property: "og:title", content: "Real. Life Healing | Therapy in Indiana" },
       {
         property: "og:description",
         content: "Healing happens in real life. Warm, sincere therapy since 2019.",
@@ -51,7 +51,7 @@ function Home() {
               Healing happens in <em className="text-honey not-italic md:italic">real life</em>.
             </h1>
             <p className="mt-6 max-w-xl font-serif text-lg text-cream/85 md:text-xl">
-              Real, affordable therapy and sincere therapeutic healing —
+              Real, affordable therapy and sincere therapeutic healing,
               serving the State of Indiana since 2019.
             </p>
 
@@ -81,7 +81,7 @@ function Home() {
             <div className="absolute h-72 w-72 rounded-full bg-honey/20 blur-3xl" />
             <img
               src={sanctuaryMark}
-              alt="The Sanctuary Mark — a stack of balanced stones"
+              alt="The Sanctuary Mark: a stack of balanced stones"
               width={420}
               height={420}
               className="relative h-72 w-72 object-contain md:h-96 md:w-96"
@@ -107,7 +107,7 @@ function Home() {
             </p>
             <p className="mt-8 font-serif text-2xl leading-relaxed text-evergreen md:text-3xl">
               To provide high-quality counseling to individuals, couples, and
-              families experiencing emotional or psychological difficulties — with
+              families experiencing emotional or psychological difficulties, with
               warmth, respect, and care.
             </p>
           </div>

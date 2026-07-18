@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "Is online therapy as effective as meeting in person?",
-    a: "For many concerns — including anxiety, depression, grief, and trauma — research has found telehealth therapy comparably effective to in-person care. Many clients find it easier to open up from the comfort of their own space.",
+    a: "For many concerns, including anxiety, depression, grief, and trauma, research has found telehealth therapy comparably effective to in-person care. Many clients find it easier to open up from the comfort of their own space.",
   },
   {
     q: "Is my session private?",
@@ -40,13 +40,13 @@ export const Route = createFileRoute("/getting-started")({
   head: () => ({
     meta: [
       { property: "og:url", content: "https://reallifehealing.info/getting-started" },
-      { title: "Getting Started — Online Therapy in Indiana | Real. Life Healing" },
+      { title: "Getting Started: Online Therapy in Indiana | Real. Life Healing" },
       {
         name: "description",
         content:
           "How to begin therapy with Real. Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in Indiana.",
       },
-      { property: "og:title", content: "Getting Started — Real. Life Healing" },
+      { property: "og:title", content: "Getting Started | Real. Life Healing" },
       {
         property: "og:description",
         content: "Three simple steps to begin affordable telehealth therapy in Indiana.",
@@ -61,7 +61,7 @@ const steps = [
   {
     n: "01",
     title: "Reach out",
-    body: "Send an appointment request or use the client portal. Share what's on your mind — a few sentences is plenty.",
+    body: "Send an appointment request or use the client portal. Share what's on your mind. A few sentences is plenty.",
   },
   {
     n: "02",
@@ -88,7 +88,7 @@ function GettingStarted() {
           </h1>
           <p className="mx-auto mt-6 max-w-2xl font-serif text-lg text-forest">
             Beginning therapy can feel like a lot. Real. Life Healing keeps it
-            simple, warm, and affordable — telehealth care built around your
+            simple, warm, and affordable: telehealth care built around your
             real life.
           </p>
         </div>
@@ -123,11 +123,11 @@ function GettingStarted() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1fr_0.8fr] md:items-center">
           <div>
             <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
-              Who I work with — telehealth counseling across Indiana
+              Who I work with: telehealth counseling across Indiana
             </h2>
             <p className="mt-4 text-forest">
               Individuals, couples, and families across Indiana experiencing
-              emotional or psychological difficulties — anxiety, depression,
+              emotional or psychological difficulties: anxiety, depression,
               trauma, grief, and relationship strain. The practice is
               multiculturally sensitive and gender-affirming; people of every
               background and identity are welcome here.
@@ -138,7 +138,7 @@ function GettingStarted() {
               What sessions look like
             </h2>
             <p className="mt-4 text-forest">
-              Secure video telehealth from anywhere in Indiana — Indianapolis, Fort Wayne, Evansville, South Bend, Bloomington, and every community between. Sessions
+              Secure video telehealth from anywhere in Indiana: Indianapolis, Fort Wayne, Evansville, South Bend, Bloomington, and every community between. Sessions
               typically run 45 to 60 minutes. We use CBT as our foundation, adding
               EMDR or trauma-informed approaches when they'll help you most.
             </p>

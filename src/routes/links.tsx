@@ -11,13 +11,13 @@ export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
       { property: "og:url", content: "https://reallifehealing.info/links" },
-      { title: "Links — Real. Life Healing" },
+      { title: "Links | Real. Life Healing" },
       {
         name: "description",
         content:
           "Find Real. Life Healing on Instagram, Facebook, YouTube, and TikTok, plus sign up for updates from Kelly Day, LMHC.",
       },
-      { property: "og:title", content: "Links — Real. Life Healing" },
+      { property: "og:title", content: "Links | Real. Life Healing" },
     ],
     links: [{ rel: "canonical", href: "https://reallifehealing.info/links" }],
   }),
@@ -179,7 +179,7 @@ function LinksPage() {
           )}
           {status === "error" && (
             <p className="mt-3 text-xs text-cream/70">
-              That didn't go through — email{" "}
+              That didn't go through. Email{" "}
               <a href={`mailto:${KELLY_EMAIL}`} className="text-honey underline">
                 {KELLY_EMAIL}
               </a>{" "}

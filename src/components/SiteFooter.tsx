@@ -46,7 +46,7 @@ export function SiteFooter() {
 
       <div className="border-t border-cream/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-cream/60 md:flex-row">
-          <p>© {new Date().getFullYear()} Real. Life Healing — All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Real. Life Healing. All rights reserved.</p>
           <p>Indiana · Telehealth</p>
         </div>
       </div>

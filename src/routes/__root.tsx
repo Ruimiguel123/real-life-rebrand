@@ -109,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Real. Life Healing — Therapy & Counseling in Indiana" },
+      { title: "Real. Life Healing | Therapy & Counseling in Indiana" },
       {
         name: "description",
         content:
@@ -120,13 +120,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: "https://reallifehealing.info/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Real. Life Healing — online therapy in Indiana" },
+      { property: "og:image:alt", content: "Real. Life Healing, online therapy in Indiana" },
       { name: "twitter:image", content: "https://reallifehealing.info/og-image.jpg" },
-      { property: "og:title", content: "Real. Life Healing — Therapy & Counseling in Indiana" },
+      { property: "og:title", content: "Real. Life Healing | Therapy & Counseling in Indiana" },
       {
         property: "og:description",
         content:
-          "Real, affordable therapy and sincere therapeutic healing — serving the State of Indiana since 2019.",
+          "Real, affordable therapy and sincere therapeutic healing, serving the State of Indiana since 2019.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

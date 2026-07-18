@@ -21,7 +21,7 @@ export function BeginYourCare() {
             Begin your care
           </h2>
           <p className="mx-auto mt-4 max-w-xl font-serif text-lg italic text-cream/80">
-            Real, affordable therapy — a warm next step, whether you're new
+            Real, affordable therapy. A warm next step, whether you're new
             here or coming back.
           </p>
         </div>

@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------
-// Site integrations — this is the ONLY file you need to edit
+// Site integrations - this is the ONLY file you need to edit
 // when Kelly hands over her real URLs.
 // ---------------------------------------------------------------
 
@@ -10,7 +10,7 @@ export const SIMPLEPRACTICE_BOOKING_URL = "https://kelly-day.clientsecure.me";
 export const SIMPLEPRACTICE_PORTAL_URL = "https://kelly-day.clientsecure.me";
 
 // Make.com custom webhook. Handles BOTH the appointment form and the
-// newsletter signup — the payload includes a `type` field
+// newsletter signup - the payload includes a `type` field
 // ("appointment" | "newsletter") so a Router in Make can branch.
 export const CONTACT_WEBHOOK_URL = "";
 

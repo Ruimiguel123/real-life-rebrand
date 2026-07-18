@@ -9,7 +9,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 async function postToWebhook(payload: Record<string, string>) {
   // First try a normal fetch; if CORS blocks the response, retry
-  // opaque (no-cors) — Make still receives the data either way.
+  // opaque (no-cors) - Make still receives the data either way.
   try {
     const res = await fetch(CONTACT_WEBHOOK_URL, {
       method: "POST",
@@ -47,7 +47,7 @@ export function AppointmentForm() {
       setForm((f) => ({ ...f, [field]: e.target.value }));
 
   const mailtoFallback = () => {
-    const subject = encodeURIComponent("Appointment Request — Website");
+    const subject = encodeURIComponent("Appointment Request from Website");
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nPreferred contact: ${form.contactPref}\n\n${form.message}`,
     );
@@ -188,7 +188,7 @@ export function AppointmentForm() {
       )}
 
       <p className="mt-2 text-xs leading-relaxed text-forest/60">
-        This form is for scheduling only — please don't include detailed
+        This form is for scheduling only. Please don't include detailed
         health information here. If you're in crisis or thinking about harming
         yourself, call or text 988 (Suicide &amp; Crisis Lifeline) or dial 911.
       </p>
