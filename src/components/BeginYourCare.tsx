@@ -1,13 +1,10 @@
 import {
-  SIMPLEPRACTICE_BOOKING_URL,
   SIMPLEPRACTICE_PORTAL_URL,
   isConfigured,
 } from "@/config/simplepractice";
 import { AppointmentForm } from "@/components/AppointmentForm";
-import { SimplePracticeWidget } from "@/components/SimplePracticeWidget";
 
 export function BeginYourCare() {
-  const bookingLive = isConfigured(SIMPLEPRACTICE_BOOKING_URL);
   const portalLive = isConfigured(SIMPLEPRACTICE_PORTAL_URL);
 
   return (
@@ -65,22 +62,11 @@ export function BeginYourCare() {
               </span>
             </a>
 
-            {bookingLive && (
-              <div className="flex flex-col rounded-2xl border border-honey/40 bg-evergreen p-8 text-cream shadow-sm">
-                <span className="text-xs uppercase tracking-[0.22em] text-cream/60">
-                  Prefer to self-schedule?
-                </span>
-                <span className="mt-3 font-serif text-2xl">
-                  Book online through SimplePractice
-                </span>
-                <SimplePracticeWidget className="mt-6 self-start" />
-              </div>
-            )}
           </div>
         </div>
 
         <p className="mt-10 text-center text-xs uppercase tracking-[0.22em] text-cream/50">
-          {portalLive || bookingLive
+          {portalLive
             ? "Secure scheduling powered by SimplePractice"
             : "SimplePractice scheduling coming soon"}
         </p>

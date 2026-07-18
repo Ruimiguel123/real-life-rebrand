@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "Is my session private?",
-    a: "Yes. Sessions take place over a secure, HIPAA-compliant video platform through SimplePractice, and scheduling and messaging happen through the same protected client portal.",
+    a: "Yes. Sessions take place over a secure, HIPAA-compliant video platform through SimplePractice. Scheduling and messaging happen through the same protected client portal.",
   },
 ];
 

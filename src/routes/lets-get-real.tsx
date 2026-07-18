@@ -34,21 +34,18 @@ const posts = [
     title: "What client-centered actually means",
     excerpt:
       "A short note on why your goals shape the work, not the other way around.",
-    date: "Coming soon",
   },
   {
     tag: "On trauma",
     title: "EMDR, in plain language",
     excerpt:
       "How EMDR works, what a session feels like, and who it tends to help most.",
-    date: "Coming soon",
   },
   {
     tag: "On grief",
     title: "Grief doesn't move in a line",
     excerpt:
       "Why the stages model can mislead, and what a more honest map looks like.",
-    date: "Coming soon",
   },
 ];
 
@@ -130,9 +127,6 @@ function LetsGetReal() {
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-forest">
                   {post.excerpt}
                 </p>
-                <span className="mt-6 text-xs uppercase tracking-[0.22em] text-forest/60">
-                  {post.date}
-                </span>
               </article>
             ))}
           </div>
