@@ -18,7 +18,7 @@ const practiceJsonLd = JSON.stringify({
   "@id": "https://reallifehealing.info/#practice",
   name: "Real. Life Healing",
   description:
-    "Client-centered CBT, trauma and grief counseling. Real, affordable telehealth for individuals, couples, and families across Indiana.",
+    "Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling. Real, affordable telehealth for individuals, couples, and families across Indiana.",
   url: SITE_URL || "https://reallifehealing.info",
   logo: "https://reallifehealing.info/apple-touch-icon.png",
   image: "https://reallifehealing.info/og-image.jpg",
@@ -113,7 +113,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Real, affordable therapy with Kelly Day, LMHC, NCC. Client-centered CBT, EMDR, trauma and grief counseling for individuals, couples, and families across Indiana.",
+          "Real, affordable therapy with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), Eye Movement Desensitization and Reprocessing (EMDR), trauma and grief counseling for individuals, couples, and families across Indiana.",
       },
       { name: "author", content: "Real. Life Healing" },
       { name: "theme-color", content: "#344338" },

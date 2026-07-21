@@ -37,9 +37,9 @@ const posts = [
   },
   {
     tag: "On trauma",
-    title: "EMDR, in plain language",
+    title: "Eye Movement Desensitization and Reprocessing (EMDR), in plain language",
     excerpt:
-      "How EMDR works, what a session feels like, and who it tends to help most.",
+      "How Eye Movement Desensitization and Reprocessing (EMDR) works, what a session feels like, and who it tends to help most.",
   },
   {
     tag: "On grief",

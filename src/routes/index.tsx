@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered CBT, trauma and grief counseling. Affordable telehealth for individuals, couples, and families. Ages 16+.",
+          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling. Affordable telehealth for individuals, couples, and families. Ages 16+.",
       },
       { property: "og:title", content: "Real. Life Healing | Therapy in Indiana" },
       {
@@ -122,12 +122,12 @@ function Home() {
               Approach
             </p>
             <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
-              A client-centered practice, rooted in CBT.
+              A client-centered practice, rooted in Cognitive Behavioral Therapy (CBT).
             </h2>
             <p className="mt-6 font-serif text-lg leading-relaxed text-forest">
               I work collaboratively with you to identify your goals and develop
               a personalized plan for treatment. Cognitive Behavioral Therapy
-              anchors our work, integrated with EMDR and trauma-informed care
+              anchors our work, integrated with Eye Movement Desensitization and Reprocessing (EMDR) and trauma-informed care
               when it's the right fit.
             </p>
             <p className="mt-4 font-serif italic text-forest/85">
@@ -202,8 +202,8 @@ function Home() {
                 note: "No waitlist",
               },
               {
-                title: "On call",
-                note: "1-317-918-3195",
+                title: "Available 24/7",
+                note: "On call · 1-317-918-3195",
                 href: "tel:+13179183195",
               },
             ].map((item) => (
@@ -255,7 +255,7 @@ function Home() {
             {/* Left two certifications */}
             <div className="flex flex-col gap-6 md:order-1">
               {[
-                "Certified in EMDR Therapy for PTSD & Trauma",
+                "Certified in Eye Movement Desensitization and Reprocessing (EMDR) Therapy for PTSD & Trauma",
                 "Professional PTSD Counseling Diploma",
               ].map((cred) => (
                 <div

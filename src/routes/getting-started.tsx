@@ -139,8 +139,8 @@ function GettingStarted() {
             </h2>
             <p className="mt-4 text-forest">
               Secure video telehealth from anywhere in Indiana: Indianapolis, Fort Wayne, Evansville, South Bend, Bloomington, and every community between. Sessions
-              typically run 45 to 60 minutes. We use CBT as our foundation, adding
-              EMDR or trauma-informed approaches when they'll help you most.
+              typically run 45 to 60 minutes. We use Cognitive Behavioral Therapy (CBT) as our foundation, adding
+              Eye Movement Desensitization and Reprocessing (EMDR) or trauma-informed approaches when they'll help you most.
             </p>
           </div>
           <img
