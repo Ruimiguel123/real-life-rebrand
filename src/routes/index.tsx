@@ -3,7 +3,7 @@ import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import heroSanctuary from "@/assets/hero-sanctuary.jpg";
 import stonesBalance from "@/assets/stones-balance.jpg";
 import ownSpace from "@/assets/own-space.jpg";
-import reachingHands from "@/assets/reaching-hands.jpg";
+import kellyDay from "@/assets/kelly-day.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
 
@@ -202,8 +202,9 @@ function Home() {
                 note: "No waitlist",
               },
               {
-                title: "Available 24/7",
-                note: "Book online anytime",
+                title: "On call",
+                note: "1-317-918-3195",
+                href: "tel:+13179183195",
               },
             ].map((item) => (
               <div
@@ -214,9 +215,18 @@ function Home() {
                 <p className="mt-3 font-serif text-lg leading-snug">
                   {item.title}
                 </p>
-                <p className="mt-1 text-xs uppercase tracking-[0.18em] text-forest/70">
-                  {item.note}
-                </p>
+                {item.href ? (
+                  <a
+                    href={item.href}
+                    className="mt-1 block text-xs uppercase tracking-[0.18em] text-honey hover:underline"
+                  >
+                    {item.note}
+                  </a>
+                ) : (
+                  <p className="mt-1 text-xs uppercase tracking-[0.18em] text-forest/70">
+                    {item.note}
+                  </p>
+                )}
               </div>
             ))}
           </div>
@@ -227,33 +237,54 @@ function Home() {
 
       {/* Credentials */}
       <section className="bg-cream">
-        <div className="mx-auto max-w-5xl px-6 py-24">
-          <div className="grid gap-10 md:grid-cols-[1fr_2fr]">
-            <div>
-              <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
-                Meet your therapist
-              </p>
-              <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
-                Kelly Day, <span className="italic">LMHC, NCC</span>
-              </h2>
-              <p className="mt-4 text-sm text-forest/80">
-                Dedicated to helping clients achieve their goals and improve
-                their mental health and well-being.
-              </p>
+        <div className="mx-auto max-w-6xl px-6 py-24">
+          <div className="text-center">
+            <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
+              Meet your therapist
+            </p>
+            <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
+              Kelly Day, <span className="italic">LMHC, NCC</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm text-forest/80">
+              Dedicated to helping clients achieve their goals and improve their
+              mental health and well-being.
+            </p>
+          </div>
+
+          <div className="mt-14 grid items-center gap-6 md:grid-cols-[1fr_auto_1fr]">
+            {/* Left two certifications */}
+            <div className="flex flex-col gap-6 md:order-1">
+              {[
+                "Certified in EMDR Therapy for PTSD & Trauma",
+                "Professional PTSD Counseling Diploma",
+              ].map((cred) => (
+                <div
+                  key={cred}
+                  className="rounded-2xl bg-sand/60 p-5 text-sm text-evergreen md:text-right"
+                >
+                  <span className="font-display text-[0.65rem] uppercase tracking-[0.22em] text-honey">
+                    Certified
+                  </span>
+                  <p className="mt-2 font-serif text-base leading-snug">{cred}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Kelly's photo, centered */}
+            <div className="mx-auto md:order-2">
               <img
-                src={reachingHands}
-                alt="Two hands reaching toward each other against an open sky"
-                width={1050}
-                height={1400}
-                className="mt-8 hidden h-64 w-full rounded-2xl object-cover shadow-sm md:block"
+                src={kellyDay}
+                alt="Kelly Day, Licensed Mental Health Counselor"
+                width={800}
+                height={800}
+                className="h-56 w-56 rounded-full object-cover shadow-md ring-4 ring-sand/70 md:h-64 md:w-64"
                 loading="lazy"
               />
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            {/* Right two certifications */}
+            <div className="flex flex-col gap-6 md:order-3">
               {[
-                "Certified in EMDR Therapy for PTSD & Trauma",
-                "Professional PTSD Counseling Diploma",
                 "Certified Trauma-Informed Counselor & Coach",
                 "Certified in Grief & Bereavement Counseling",
               ].map((cred) => (

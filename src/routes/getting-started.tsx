@@ -59,17 +59,17 @@ export const Route = createFileRoute("/getting-started")({
 
 const steps = [
   {
-    n: "01",
+    n: "1",
     title: "Reach out",
     body: "Send an appointment request or use the client portal. Share what's on your mind. A few sentences is plenty.",
   },
   {
-    n: "02",
+    n: "2",
     title: "A warm first call",
     body: "We'll meet for a short consultation to make sure it's a good fit, answer questions, and choose a time to begin.",
   },
   {
-    n: "03",
+    n: "3",
     title: "Begin your work",
     body: "Sessions happen securely online. We collaborate on your goals and adjust the plan as real life unfolds.",
   },

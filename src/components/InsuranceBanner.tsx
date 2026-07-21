@@ -47,7 +47,7 @@ export function InsuranceBanner() {
         <PillGroup label="Employee Assistance Programs" items={eaps} />
 
         <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
-          <p className="font-display text-[0.65rem] uppercase tracking-[0.28em] text-honey">
+          <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
             No insurance?
           </p>
           <p className="mt-2 text-sm text-cream/85">
