@@ -255,8 +255,8 @@ function Home() {
             {/* Left two certifications */}
             <div className="flex flex-col gap-6 md:order-1">
               {[
-                "Certified in Eye Movement Desensitization and Reprocessing (EMDR) Therapy for PTSD & Trauma",
-                "Professional PTSD Counseling Diploma",
+                "Certified in Eye Movement Desensitization and Reprocessing (EMDR) Therapy for Post Traumatic Stress Disorder (PTSD) & Trauma",
+                "Professional Post Traumatic Stress Disorder (PTSD) Counseling Diploma",
               ].map((cred) => (
                 <div
                   key={cred}

@@ -157,10 +157,7 @@ function GettingStarted() {
       {/* FAQ */}
       <section className="bg-cream">
         <div className="mx-auto max-w-3xl px-6 py-24">
-          <p className="text-center font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
-            Common questions
-          </p>
-          <h2 className="mt-4 text-center font-serif text-3xl text-evergreen md:text-4xl">
+          <h2 className="text-center font-serif text-3xl text-evergreen md:text-4xl">
             Frequently asked questions
           </h2>
           <div className="mt-10 flex flex-col gap-3">
