@@ -1,0 +1,173 @@
+<!--
+  Real. Life Healing — structured data for the HOMEPAGE (/)
+  Paste this block inside <head> on the homepage only.
+
+  Every value below was taken from what is currently published on the live
+  site. Nothing is invented. Before shipping, confirm with Kelly that the
+  credential list and the insurance list are still accurate — schema markup
+  that overstates credentials is a real risk for a licensed provider.
+
+  If you make reallifehealing.info the canonical host instead of .care,
+  find-and-replace "reallifehealing.care" with "reallifehealing.info"
+  throughout this file.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://reallifehealing.care/#website",
+      "url": "https://reallifehealing.care/",
+      "name": "Real. Life Healing",
+      "description": "Online therapy in Indiana with Kelly Day, LMHC, NCC.",
+      "inLanguage": "en-US",
+      "publisher": { "@id": "https://reallifehealing.care/#practice" }
+    },
+    {
+      "@type": ["MedicalBusiness", "ProfessionalService"],
+      "@id": "https://reallifehealing.care/#practice",
+      "name": "Real. Life Healing",
+      "alternateName": "Real. Life Healing Mental Health Counseling",
+      "slogan": "Healing happens in real life.",
+      "description": "Real, affordable telehealth therapy for individuals, couples, and families across the State of Indiana. Client-centered counseling rooted in Cognitive Behavioral Therapy, with EMDR and trauma-informed care when it is the right fit.",
+      "url": "https://reallifehealing.care/",
+      "telephone": "+1-317-918-3195",
+      "email": "kelly.daylmhc@gmail.com",
+      "foundingDate": "2019",
+      "image": "https://reallifehealing.care/assets/hero-sanctuary-DEuYGT7D.jpg",
+      "logo": "https://reallifehealing.care/assets/sanctuary-mark-BeMQzLLZ.png",
+      "medicalSpecialty": "Psychiatric",
+      "isAcceptingNewPatients": true,
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "IN",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Indiana"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceType": "Telehealth",
+        "serviceUrl": "https://kelly-day.clientsecure.me",
+        "availableLanguage": {
+          "@type": "Language",
+          "name": "English"
+        }
+      },
+      "paymentAccepted": "Aetna, Anthem Blue Cross Blue Shield, United HealthCare, Optum, Skai BCBS, Anthem EAP and other Employee Assistance Programs, private pay, and reduced-fee sessions through Open Path Collective",
+      "knowsAbout": [
+        "Cognitive Behavioral Therapy",
+        "Eye Movement Desensitization and Reprocessing (EMDR)",
+        "Trauma-informed care",
+        "Grief and bereavement counseling",
+        "Anxiety",
+        "Depression",
+        "Couples and family counseling",
+        "LGBTQ+ and gender-affirming care"
+      ],
+      "founder": { "@id": "https://reallifehealing.care/#kelly-day" },
+      "employee": { "@id": "https://reallifehealing.care/#kelly-day" },
+      "sameAs": [
+        "https://www.instagram.com/_reallifehealing_",
+        "https://www.facebook.com/profile.php?id=100088250803218",
+        "https://youtube.com/@reallifewithkmo",
+        "https://www.tiktok.com/@_real.life_healing"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Counseling services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Individual therapy (ages 16+)",
+              "description": "One-to-one telehealth counseling for adults and older teens across Indiana."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Couples and family counseling",
+              "description": "Telehealth sessions for couples and families working through relationship strain."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Trauma and PTSD counseling",
+              "description": "Trauma-informed care, including EMDR when it is the right fit."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Grief and bereavement counseling",
+              "description": "Support through loss, at whatever pace grief actually moves."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://reallifehealing.care/#kelly-day",
+      "name": "Kelly Day",
+      "honorificSuffix": "LMHC, NCC",
+      "jobTitle": "Licensed Mental Health Counselor",
+      "description": "Dedicated to helping clients achieve their goals and improve their mental health and well-being.",
+      "image": "https://reallifehealing.care/assets/kelly-day-ClCkpxMV.jpg",
+      "url": "https://reallifehealing.care/",
+      "worksFor": { "@id": "https://reallifehealing.care/#practice" },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "license",
+          "name": "Licensed Mental Health Counselor (LMHC)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "National Certified Counselor (NCC)"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "Certified in Eye Movement Desensitization and Reprocessing (EMDR) Therapy for PTSD and Trauma"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "diploma",
+          "name": "Professional Post Traumatic Stress Disorder (PTSD) Counseling Diploma"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "Certified Trauma-Informed Counselor and Coach"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "certification",
+          "name": "Certified in Grief and Bereavement Counseling"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://reallifehealing.care/#webpage",
+      "url": "https://reallifehealing.care/",
+      "name": "Real. Life Healing | Therapy & Counseling in Indiana",
+      "isPartOf": { "@id": "https://reallifehealing.care/#website" },
+      "about": { "@id": "https://reallifehealing.care/#practice" },
+      "primaryImageOfPage": "https://reallifehealing.care/assets/hero-sanctuary-DEuYGT7D.jpg",
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>

@@ -1,0 +1,98 @@
+<!--
+  Real. Life Healing — structured data for /getting-started
+  Paste this block inside <head> on the Getting Started page only.
+
+  The FAQ questions and answers below are the exact five already visible in
+  the accordion on that page. Google requires schema to match visible page
+  content, so if the accordion copy changes, this block changes with it.
+
+  Honest expectation-setting: since 2023 Google has limited FAQ rich results
+  to well-known government and health authorities, so this will most likely
+  NOT produce star-style FAQ snippets in search. It is still worth shipping —
+  it is how AI answer engines and Google's entity graph parse the page.
+
+  If you make reallifehealing.info the canonical host instead of .care,
+  find-and-replace "reallifehealing.care" with "reallifehealing.info".
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://reallifehealing.care/getting-started#webpage",
+      "url": "https://reallifehealing.care/getting-started",
+      "name": "Getting Started: Online Therapy in Indiana | Real. Life Healing",
+      "description": "How to begin therapy with Real. Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in Indiana.",
+      "isPartOf": { "@id": "https://reallifehealing.care/#website" },
+      "about": { "@id": "https://reallifehealing.care/#practice" },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://reallifehealing.care/getting-started#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://reallifehealing.care/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Getting Started",
+          "item": "https://reallifehealing.care/getting-started"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://reallifehealing.care/getting-started#faq",
+      "isPartOf": { "@id": "https://reallifehealing.care/getting-started#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does insurance cover online therapy in Indiana?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In most cases, yes. Real. Life Healing is in-network with Aetna, Anthem Blue Cross Blue Shield, United HealthCare, Optum, and Skai BCBS, and works with Employee Assistance Programs including Anthem EAP. Coverage is verified before your first session so there are no surprises."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I don't have insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kelly offers reduced-fee sessions through Open Path Collective, a nonprofit network for affordable therapy. Reach out and we'll find a rate that works with your budget."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What ages do you work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Individual sessions are available for ages 16 and up. Family and group sessions are also available."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is online therapy as effective as meeting in person?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For many concerns, including anxiety, depression, grief, and trauma, research has found telehealth therapy comparably effective to in-person care. Many clients find it easier to open up from the comfort of their own space."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my session private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Sessions take place over a secure, HIPAA-compliant video platform through SimplePractice. Scheduling and messaging happen through the same protected client portal."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>

@@ -1,4 +1,10 @@
+# Real. Life Healing — https://reallifehealing.care
+# Kelly Day, LMHC, NCC — telehealth counseling, State of Indiana
+
 User-agent: *
 Allow: /
 
-Sitemap: https://reallifehealing.info/sitemap.xml
+# The SimplePractice client portal lives on a separate host and is not
+# crawlable from here; no disallow rules are needed on this domain.
+
+Sitemap: https://reallifehealing.care/sitemap.xml
