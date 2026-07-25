@@ -139,7 +139,7 @@ function Home() {
           <ul className="grid gap-3 text-sm">
             {[
               "Individuals, couples, and families",
-              "Cognitive Behavioral Therapy (CBT)",
+              "Cognitive Behavioral Therapy (CBT) with Integrative Therapeutic approach",
               "Grief & bereavement counseling",
               "Trauma-informed care",
               "Multiculturally sensitive counseling",
