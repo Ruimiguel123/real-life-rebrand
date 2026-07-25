@@ -15,11 +15,12 @@
 
 .root {
   /* Map to your tokens; fallbacks derive from theme-color #344338. */
-  --rlh-form-ink: var(--color-text, #2f3a33);
-  --rlh-form-ink-muted: var(--color-text-muted, #5c6b60);
-  --rlh-form-accent: var(--color-accent, #344338);
-  --rlh-form-rule: var(--color-rule, rgba(52, 67, 56, 0.16));
-  --rlh-form-surface: var(--color-surface-soft, rgba(52, 67, 56, 0.045));
+  /* Mapped to this project's actual tokens (see src/styles.css). */
+  --rlh-form-ink: var(--color-evergreen, #2f3a33);
+  --rlh-form-ink-muted: var(--color-forest, #5c6b60);
+  --rlh-form-accent: var(--color-honey, #344338);
+  --rlh-form-rule: rgba(52, 67, 56, 0.16);
+  --rlh-form-surface: rgba(52, 67, 56, 0.045);
   --rlh-form-min-height: 620px;
 
   color: var(--rlh-form-ink);

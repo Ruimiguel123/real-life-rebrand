@@ -2,7 +2,7 @@ import {
   SIMPLEPRACTICE_PORTAL_URL,
   isConfigured,
 } from "@/config/simplepractice";
-import { AppointmentForm } from "@/components/AppointmentForm";
+import { SecureContactForm } from "@/components/SecureContactForm";
 
 export function BeginYourCare() {
   const portalLive = isConfigured(SIMPLEPRACTICE_PORTAL_URL);
@@ -24,8 +24,22 @@ export function BeginYourCare() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-[1.4fr_1fr] md:items-stretch">
-          {/* New clients: request form → emails Kelly */}
-          <AppointmentForm />
+          {/* New clients: Hushmail Secure Form → encrypted, BAA-covered.
+              Replaced the previous AppointmentForm, which fell back to a
+              mailto: and sent client details through the visitor's own
+              email client in plain text. */}
+          <div className="flex flex-col gap-4 rounded-2xl bg-cream p-8 text-evergreen shadow-sm">
+            <div>
+              <span className="text-xs uppercase tracking-[0.22em] text-forest/70">
+                New client
+              </span>
+              <h3 className="mt-2 font-serif text-2xl">
+                Request an appointment
+              </h3>
+            </div>
+
+            <SecureContactForm />
+          </div>
 
           {/* Existing clients + online booking */}
           <div className="flex flex-col gap-6">

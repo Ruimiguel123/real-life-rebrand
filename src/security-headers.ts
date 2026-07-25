@@ -29,15 +29,17 @@
  * script, and static asset serving cannot mint a per-request nonce. The
  * hash-based alternative is described in docs/security-headers.md.
  */
+const HUSHMAIL = 'https://hushforms.com https://*.hushforms.com';
+
 const CSP_DIRECTIVES = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://hushforms.com",
+  `script-src 'self' 'unsafe-inline' ${HUSHMAIL}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob:",
-  "font-src 'self' data:",
-  "connect-src 'self' https://hushforms.com",
-  "frame-src https://hushforms.com",
-  "form-action 'self' https://hushforms.com",
+  `img-src 'self' data: ${HUSHMAIL}`,
+  "font-src 'self'",
+  `connect-src 'self' ${HUSHMAIL}`,
+  `frame-src ${HUSHMAIL}`,
+  `form-action 'self' ${HUSHMAIL}`,
   "frame-ancestors 'self'",
   "base-uri 'self'",
   "object-src 'none'",
@@ -45,11 +47,25 @@ const CSP_DIRECTIVES = [
 ].join('; ');
 
 /**
- * Set to true only after confirming, on every route, that the Report-Only
- * policy produces no console violations. Flipping this early breaks the
- * Hushmail intake form, which is the site's primary conversion path.
+ * Enforcing. Report-Only does not count toward a securityheaders.com grade,
+ * and every origin this site loads from has now been audited from source:
+ *
+ *   - Fonts are self-hosted via @fontsource, bundled at build time. There is
+ *     no Google Fonts request, so font-src 'self' is sufficient.
+ *   - hushforms.com is the only third-party origin fetched at runtime.
+ *   - instagram / facebook / tiktok / youtube / amazon / openpathcollective /
+ *     clientsecure.me are plain links. Navigation is not subresource loading
+ *     and needs no CSP entry.
+ *   - JSON-LD blocks are type="application/ld+json", which browsers do not
+ *     execute and CSP does not gate.
+ *
+ * If SimplePracticeWidget is ever rendered (the component exists but is not
+ * currently used anywhere), script-src must also allow
+ * https://widget-cdn.simplepractice.com or the widget will silently fail.
+ *
+ * ROLLBACK: set this to false, redeploy. Nothing else needs to change.
  */
-const ENFORCE_CSP = false;
+const ENFORCE_CSP = true;
 
 const PERMISSIONS_POLICY = [
   'accelerometer=()',
