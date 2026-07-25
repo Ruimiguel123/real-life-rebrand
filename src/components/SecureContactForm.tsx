@@ -2,28 +2,27 @@
  * SecureContactForm
  * Real. Life Healing — Hushmail Secure Forms embed wrapper
  *
- * Why this component exists instead of pasting the raw embed into a page:
+ * Why this exists instead of pasting the raw Hushmail snippet into a page:
  *
- * 1. A <script> tag rendered by React never executes. If the Hushmail snippet
- *    is placed in JSX or injected with dangerouslySetInnerHTML, the browser
- *    parses it but will not run it. The script must be appended to the
- *    document imperatively.
- * 2. On client-side route changes the embed does not re-initialize, so the
- *    form silently fails to appear on any navigation after the first.
- * 3. The embed injects its markup after load, which shifts the page on the
- *    single most important element on the site. The container reserves height.
+ * 1. A <script> tag rendered by React never executes. If the snippet is
+ *    placed in JSX or injected with dangerouslySetInnerHTML, the browser
+ *    parses it and moves on. The script must be appended imperatively.
+ * 2. The embed does not re-initialize on client-side navigation, so the form
+ *    silently fails to appear on any route change after the first load.
+ * 3. The embed injects its markup after load, shifting the page on the most
+ *    important element on the site. The container reserves height.
  * 4. If hushforms.com is slow, blocked by a privacy extension, or unreachable
- *    on a corporate network, the container renders empty and the primary
- *    conversion path disappears with no explanation. This falls back to the
- *    phone number and the client portal instead.
+ *    on a corporate network, the raw embed leaves an empty div and the primary
+ *    conversion path vanishes with no explanation.
  *
- * Hushmail does not document a public re-init function for the embed, so this
- * removes and re-appends the script on mount. That is the pragmatic approach
- * for embeds without an init API. If Hushmail support confirms a global
- * initializer exists, call that in the effect instead — it is cheaper.
+ * Hushmail publishes no re-init function for the embed, so this removes and
+ * re-appends the script on mount. That is the standard approach for embeds
+ * without an init API. If their support confirms a global initializer exists,
+ * call it in the effect instead — it avoids re-fetching the script.
  */
 
 import { useEffect, useRef, useState } from 'react';
+import styles from './SecureContactForm.module.css';
 
 const EMBED_ID = 'reallifehealing-secure-contact-form';
 const SCRIPT_SRC = 'https://hushforms.com/f/public/javascript/embed-hush-form.js';
@@ -32,28 +31,55 @@ const SCRIPT_ID = 'hush-form-embed-script';
 /** How long to wait before deciding the embed is not coming. */
 const FALLBACK_TIMEOUT_MS = 8000;
 
-/** Reserved height, tuned to the rendered form. Measure and adjust once live. */
-const RESERVED_HEIGHT = 620;
-
 type EmbedState = 'loading' | 'ready' | 'unavailable';
 
-export function SecureContactForm() {
+export interface SecureContactFormProps {
+  /**
+   * Reserved height in pixels while the embed loads, to prevent layout shift.
+   * Measure the rendered form once it is live and set this to match.
+   */
+  reservedHeight?: number;
+  /** Extra class on the outer wrapper, for page-level spacing. */
+  className?: string;
+  /** Fires once the embed has injected its markup. */
+  onReady?: () => void;
+  /** Fires if the embed fails to load within the timeout. */
+  onUnavailable?: () => void;
+}
+
+export function SecureContactForm({
+  reservedHeight = 620,
+  className,
+  onReady,
+  onUnavailable,
+}: SecureContactFormProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<EmbedState>('loading');
+
+  // Keep callbacks in a ref so they don't re-trigger the effect.
+  const callbacks = useRef({ onReady, onUnavailable });
+  callbacks.current = { onReady, onUnavailable };
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let timeoutId: number | undefined;
+    let settled = false;
+
+    const settle = (next: EmbedState) => {
+      if (settled) return;
+      settled = true;
+      setState(next);
+      observer.disconnect();
+      if (timeoutId) window.clearTimeout(timeoutId);
+      if (next === 'ready') callbacks.current.onReady?.();
+      if (next === 'unavailable') callbacks.current.onUnavailable?.();
+    };
 
     // Watch for the embed injecting its own markup into the container.
     const observer = new MutationObserver(() => {
-      if (container.childElementCount > 0) {
-        setState('ready');
-        observer.disconnect();
-        if (timeoutId) window.clearTimeout(timeoutId);
-      }
+      if (container.childElementCount > 0) settle('ready');
     });
     observer.observe(container, { childList: true, subtree: true });
 
@@ -64,56 +90,57 @@ export function SecureContactForm() {
     script.id = SCRIPT_ID;
     script.src = SCRIPT_SRC;
     script.async = true;
-    script.onerror = () => {
-      setState('unavailable');
-      observer.disconnect();
-    };
+    script.onerror = () => settle('unavailable');
     document.body.appendChild(script);
 
     timeoutId = window.setTimeout(() => {
-      // Only give up if nothing was ever injected.
-      if (container.childElementCount === 0) {
-        setState('unavailable');
-        observer.disconnect();
-      }
+      if (container.childElementCount === 0) settle('unavailable');
     }, FALLBACK_TIMEOUT_MS);
 
     return () => {
+      settled = true;
       observer.disconnect();
       if (timeoutId) window.clearTimeout(timeoutId);
     };
   }, []);
 
+  const wrapperClass = className ? `${styles.root} ${className}` : styles.root;
+
   return (
-    <div className="secure-contact-form">
-      {/* Reserved space prevents the page from jumping when the form loads. */}
-      <div
-        style={{ minHeight: state === 'unavailable' ? undefined : RESERVED_HEIGHT }}
-      >
+    <div
+      className={wrapperClass}
+      style={{ '--rlh-form-min-height': `${reservedHeight}px` } as React.CSSProperties}
+    >
+      <div className={state === 'unavailable' ? undefined : styles.reserve}>
         {state === 'loading' && (
-          <p role="status" aria-live="polite" className="secure-contact-form__status">
+          <p role="status" aria-live="polite" className={styles.status}>
             Loading the secure form&hellip;
           </p>
         )}
 
+        {/* Hushmail replaces the contents of this node. */}
         <div
           ref={containerRef}
+          className={styles.embed}
           data-secure-form={EMBED_ID}
           data-secure-form-transparent-background="true"
         />
 
         {state === 'unavailable' && (
-          <div className="secure-contact-form__fallback">
-            <p>
+          <div className={styles.fallback}>
+            <p className={styles.fallbackLead}>
               The secure form isn&rsquo;t loading right now. You can still reach
-              Kelly directly:
+              Kelly directly.
             </p>
             <p>
-              <a href="tel:+13179183195">Call or text 1-317-918-3195</a>
+              <a className={styles.link} href="tel:+13179183195">
+                Call or text 1-317-918-3195
+              </a>
             </p>
             <p>
               Already a client?{' '}
               <a
+                className={styles.link}
                 href="https://kelly-day.clientsecure.me"
                 rel="noopener noreferrer"
               >
@@ -125,13 +152,13 @@ export function SecureContactForm() {
       </div>
 
       {/*
-        Crisis guidance stays in your own markup, never inside the embed —
-        it must render even when the third-party script fails.
+        Crisis guidance lives in our own markup, never inside the embed, so it
+        renders even when the third-party script fails entirely.
       */}
-      <p className="secure-contact-form__crisis">
+      <p className={styles.crisis}>
         If you&rsquo;re in crisis or thinking about harming yourself, call or
-        text 988 (Suicide &amp; Crisis Lifeline) or dial 911. This form is not
-        monitored around the clock.
+        text <strong>988</strong> (Suicide &amp; Crisis Lifeline) or dial{' '}
+        <strong>911</strong>. This form is not monitored around the clock.
       </p>
     </div>
   );
