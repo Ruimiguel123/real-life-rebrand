@@ -1,0 +1,144 @@
+/*
+ * SecureContactForm — scoped styles
+ *
+ * Palette is derived from the site's own theme-color, #344338. Every value is
+ * declared as a custom property that first looks for one of your existing
+ * design tokens and falls back to a derived value. If your token names differ,
+ * change them once here rather than throughout the file.
+ *
+ * One deliberate design decision worth naming: the fallback and crisis blocks
+ * are NOT styled as errors. No red, no warning iconography, no raised alarm.
+ * A person reading this is trying to ask for help with something difficult;
+ * a page shouting SOMETHING WENT WRONG at that moment is the wrong response.
+ * Both states are quiet, warm, and read as guidance rather than failure.
+ */
+
+.root {
+  /* Map to your tokens; fallbacks derive from theme-color #344338. */
+  --rlh-form-ink: var(--color-text, #2f3a33);
+  --rlh-form-ink-muted: var(--color-text-muted, #5c6b60);
+  --rlh-form-accent: var(--color-accent, #344338);
+  --rlh-form-rule: var(--color-rule, rgba(52, 67, 56, 0.16));
+  --rlh-form-surface: var(--color-surface-soft, rgba(52, 67, 56, 0.045));
+  --rlh-form-min-height: 620px;
+
+  color: var(--rlh-form-ink);
+}
+
+/*
+ * Reserved space stops the page jumping when the embed injects itself.
+ * Released once the fallback renders, since the fallback is much shorter and
+ * an empty 620px gap under it would look broken.
+ */
+.reserve {
+  min-height: var(--rlh-form-min-height);
+}
+
+.embed {
+  /*
+   * The embed brings its own markup and class names. Scoped selectors can't
+   * reach inside it, so these globals pull the form into the site's typeface
+   * instead of Hushmail's defaults. Kept narrow on purpose — restyling the
+   * embed properly requires inspecting its rendered DOM, which needs the form
+   * live in front of you.
+   */
+}
+
+.embed :global(input),
+.embed :global(textarea),
+.embed :global(select),
+.embed :global(button),
+.embed :global(label) {
+  font-family: inherit;
+}
+
+.status {
+  margin: 0 0 1rem;
+  color: var(--rlh-form-ink-muted);
+  font-size: 0.9375rem;
+}
+
+/* A slow, shallow breath rather than a spinner. */
+@media (prefers-reduced-motion: no-preference) {
+  .status {
+    animation: rlh-breathe 2.4s ease-in-out infinite;
+  }
+}
+
+@keyframes rlh-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.fallback {
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--rlh-form-accent);
+  background: var(--rlh-form-surface);
+  border-radius: 0 4px 4px 0;
+}
+
+.fallback p {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.fallback p:last-child {
+  margin-bottom: 0;
+}
+
+.fallbackLead {
+  color: var(--rlh-form-ink);
+}
+
+.link {
+  color: var(--rlh-form-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--rlh-form-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/*
+ * Crisis guidance. Muted enough not to dominate the form, but held above
+ * 4.5:1 contrast — this is the one line on the page that must stay legible
+ * to someone who is not reading carefully.
+ */
+.crisis {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rlh-form-rule);
+  color: var(--rlh-form-ink-muted);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  max-width: 60ch;
+}
+
+.crisis strong {
+  color: var(--rlh-form-ink);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .fallback {
+    padding: 1rem 1.125rem;
+  }
+
+  .crisis {
+    font-size: 0.9375rem; /* Nudged up on small screens for legibility. */
+  }
+}
