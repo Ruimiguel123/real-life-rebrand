@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import {
+  SITE_URL,
   CONTACT_WEBHOOK_URL,
   KELLY_EMAIL,
   isConfigured,
@@ -10,7 +11,7 @@ import {
 export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
-      { property: "og:url", content: "https://reallifehealing.info/links" },
+      { property: "og:url", content: `${SITE_URL}/links` },
       { title: "Links | Real. Life Healing" },
       {
         name: "description",
@@ -19,7 +20,7 @@ export const Route = createFileRoute("/links")({
       },
       { property: "og:title", content: "Links | Real. Life Healing" },
     ],
-    links: [{ rel: "canonical", href: "https://reallifehealing.info/links" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/links` }],
   }),
   component: LinksPage,
 });
@@ -192,7 +193,7 @@ function LinksPage() {
           href="/"
           className="mt-8 text-xs uppercase tracking-[0.22em] text-cream/50 hover:text-cream/80"
         >
-          reallifehealing.info
+          reallifehealing.care
         </a>
       </div>
     </section>

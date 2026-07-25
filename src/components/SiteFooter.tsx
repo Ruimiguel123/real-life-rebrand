@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
+import { KELLY_EMAIL } from "@/config/simplepractice";
+
 export function SiteFooter() {
   return (
     <footer className="bg-evergreen text-cream">
@@ -36,10 +38,10 @@ export function SiteFooter() {
           </a>
           <br />
           <a
-            href="mailto:kelly.daylmhc@gmail.com"
+            href={`mailto:${KELLY_EMAIL}`}
             className="mt-2 inline-block text-honey hover:underline"
           >
-            kelly.daylmhc@gmail.com
+            {KELLY_EMAIL}
           </a>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SITE_URL } from "@/config/simplepractice";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import heroSanctuary from "@/assets/hero-sanctuary.jpg";
 import stonesBalance from "@/assets/stones-balance.jpg";
@@ -10,7 +11,7 @@ import { InsuranceBanner } from "@/components/InsuranceBanner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { property: "og:url", content: "https://reallifehealing.info/" },
+      { property: "og:url", content: `${SITE_URL}/` },
       { title: "Real. Life Healing | Therapy & Counseling in Indiana" },
       {
         name: "description",
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/")({
         content: "Healing happens in real life. Warm, sincere therapy since 2019.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://reallifehealing.info/" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
   }),
   component: Home,
 });

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_URL } from "@/config/simplepractice";
 import beautifulDestinations from "@/assets/beautiful-destinations.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
@@ -39,7 +40,7 @@ const faqJsonLd = JSON.stringify({
 export const Route = createFileRoute("/getting-started")({
   head: () => ({
     meta: [
-      { property: "og:url", content: "https://reallifehealing.info/getting-started" },
+      { property: "og:url", content: `${SITE_URL}/getting-started` },
       { title: "Getting Started: Online Therapy in Indiana | Real. Life Healing" },
       {
         name: "description",
@@ -52,7 +53,7 @@ export const Route = createFileRoute("/getting-started")({
         content: "Three simple steps to begin affordable telehealth therapy in Indiana.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://reallifehealing.info/getting-started" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/getting-started` }],
   }),
   component: GettingStarted,
 });

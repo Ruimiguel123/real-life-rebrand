@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import ripples from "@/assets/ripples.jpg";
 import { useState } from "react";
 import {
+  SITE_URL,
   CONTACT_WEBHOOK_URL,
   KELLY_EMAIL,
   isConfigured,
@@ -10,7 +11,7 @@ import {
 export const Route = createFileRoute("/lets-get-real")({
   head: () => ({
     meta: [
-      { property: "og:url", content: "https://reallifehealing.info/lets-get-real" },
+      { property: "og:url", content: `${SITE_URL}/lets-get-real` },
       { title: "Let's Get Real | Real. Life Healing" },
       {
         name: "description",
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/lets-get-real")({
         content: "Honest notes on therapy, healing, and real life.",
       },
     ],
-    links: [{ rel: "canonical", href: "https://reallifehealing.info/lets-get-real" }],
+    links: [{ rel: "canonical", href: `${SITE_URL}/lets-get-real` }],
   }),
   component: LetsGetReal,
 });

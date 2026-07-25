@@ -15,7 +15,7 @@ export const SIMPLEPRACTICE_PORTAL_URL = "https://kelly-day.clientsecure.me";
 export const CONTACT_WEBHOOK_URL = "";
 
 // Where appointment requests land if the webhook isn't set up yet.
-export const KELLY_EMAIL = "kelly.daylmhc@gmail.com";
+export const KELLY_EMAIL = "kellyday@reallifehealing.care";
 
 // SimplePractice appointment-request widget (public identifiers, not secrets)
 export const SP_WIDGET = {
@@ -28,6 +28,7 @@ export const SP_WIDGET = {
 
 export const isConfigured = (url: string) => Boolean(url) && url !== "#";
 
-// Set this once the site has its real domain (e.g. "https://reallifehealing.info").
-// Used for canonical URLs and structured data. Leave "" until then.
-export const SITE_URL = "https://reallifehealing.info";
+// Canonical host for the site. Apex, no www — every internal link and asset
+// already resolves here, and www 301s to it at Cloudflare.
+// Used for canonical URLs and structured data across every route.
+export const SITE_URL = "https://reallifehealing.care";
