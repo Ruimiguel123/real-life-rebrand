@@ -57,18 +57,6 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-cream/85 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-6 py-4 sm:gap-6">
-        <button
-          ref={toggleRef}
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-controls={panelId}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="-ml-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-evergreen transition hover:bg-evergreen/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey md:hidden"
-        >
-          <MenuIcon open={open} />
-        </button>
-
         <Link to="/" className="group flex items-center gap-3">
           <img
             src={sanctuaryMark}
@@ -87,7 +75,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <div className="ml-auto flex items-center gap-6">
+        <div className="ml-auto flex items-center gap-2 sm:gap-4 md:gap-6">
           <nav className="hidden items-center gap-8 md:flex">
             {NAV_ITEMS.map((item) => (
               <NavLink key={item.to} to={item.to}>
@@ -103,6 +91,18 @@ export function SiteHeader() {
           >
             Book now
           </Link>
+
+          <button
+            ref={toggleRef}
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls={panelId}
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="-mr-2 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-evergreen transition hover:bg-evergreen/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-honey md:hidden"
+          >
+            <MenuIcon open={open} />
+          </button>
         </div>
       </div>
 
@@ -140,15 +140,6 @@ export function SiteHeader() {
             >
               Book now
             </Link>
-            <p className="mt-4 text-center text-sm text-forest/75">
-              Or call or text{" "}
-              <a
-                href="tel:+13179183195"
-                className="text-honey underline underline-offset-4"
-              >
-                1-317-918-3195
-              </a>
-            </p>
           </div>
         </div>
       )}
@@ -157,11 +148,13 @@ export function SiteHeader() {
 }
 
 /**
- * Two bars that cross into an X. Two strokes rather than the usual three, so
- * the closed and open states use the same shapes and the change reads as one
- * object rotating rather than one icon swapping for another.
+ * Three bars. On open the middle bar fades and the outer two converge on the
+ * centre line and cross, so the same three strokes become the X rather than
+ * swapping in a different icon.
  */
 function MenuIcon({ open }: { open: boolean }) {
+  const bar = "origin-center motion-safe:transition-all motion-safe:duration-200";
+
   return (
     <svg
       width="22"
@@ -175,19 +168,26 @@ function MenuIcon({ open }: { open: boolean }) {
     >
       <line
         x1="3"
-        y1={open ? "11" : "7"}
+        y1={open ? "11" : "6"}
         x2="19"
-        y2={open ? "11" : "7"}
+        y2={open ? "11" : "6"}
         transform={open ? "rotate(45 11 11)" : undefined}
-        className="origin-center motion-safe:transition-all motion-safe:duration-200"
+        className={bar}
       />
       <line
         x1="3"
-        y1={open ? "11" : "15"}
+        y1="11"
         x2="19"
-        y2={open ? "11" : "15"}
+        y2="11"
+        className={`${bar} ${open ? "opacity-0" : "opacity-100"}`}
+      />
+      <line
+        x1="3"
+        y1={open ? "11" : "16"}
+        x2="19"
+        y2={open ? "11" : "16"}
         transform={open ? "rotate(-45 11 11)" : undefined}
-        className="origin-center motion-safe:transition-all motion-safe:duration-200"
+        className={bar}
       />
     </svg>
   );
