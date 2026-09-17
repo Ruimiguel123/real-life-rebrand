@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SITE_URL } from "@/config/simplepractice";
+import {
+  SITE_URL,
+  HOME_STATE,
+  LICENSED_STATES,
+  LICENSED_STATES_TEXT,
+  LICENSED_STATES_SHORT,
+} from "@/config/simplepractice";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
 import heroSanctuary from "@/assets/hero-sanctuary.jpg";
 import stonesBalance from "@/assets/stones-balance.jpg";
@@ -7,18 +13,23 @@ import ownSpace from "@/assets/own-space.jpg";
 import kellyDay from "@/assets/kelly-day.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
+import { AreasOfFocus } from "@/components/AreasOfFocus";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { property: "og:url", content: `${SITE_URL}/` },
-      { title: "Real. Life Healing | Therapy & Counseling in Indiana" },
+      {
+        title: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+      },
       {
         name: "description",
-        content:
-          "Online therapy in Indiana with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling. Affordable telehealth for individuals, couples, and families. Ages 16+.",
+        content: `Online therapy in ${LICENSED_STATES_TEXT} with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling, caregiver support, and women's health. Affordable telehealth for individuals, couples, and families. Ages 16+.`,
       },
-      { property: "og:title", content: "Real. Life Healing | Therapy in Indiana" },
+      {
+        property: "og:title",
+        content: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+      },
       {
         property: "og:description",
         content: "Healing happens in real life. Warm, sincere therapy since 2019.",
@@ -52,8 +63,9 @@ function Home() {
               Healing happens in <em className="text-honey not-italic md:italic">real life</em>.
             </h1>
             <p className="mt-6 max-w-xl font-serif text-lg text-cream/85 md:text-xl">
-              Real, affordable therapy and sincere therapeutic healing,
-              serving the State of Indiana since 2019.
+              Real, affordable therapy and sincere therapeutic healing.
+              Serving {HOME_STATE} since 2019, now licensed in{" "}
+              {LICENSED_STATES.filter((s) => s !== HOME_STATE).join(", ")}.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -74,7 +86,7 @@ function Home() {
             </div>
 
             <p className="mt-10 text-xs uppercase tracking-[0.28em] text-cream/60">
-              Kelly Day, LMHC, NCC · Telehealth for Indiana
+              Kelly Day, LMHC, NCC · Telehealth for {LICENSED_STATES_SHORT}
             </p>
           </div>
 
@@ -142,6 +154,8 @@ function Home() {
               "Cognitive Behavioral Therapy (CBT) with Integrative Therapeutic approach",
               "Grief & bereavement counseling",
               "Trauma-informed care",
+              "Support for friends & family of those living with dementia, Alzheimer's, or addiction",
+              "Women's health: postpartum, menopause, HRT, and cancer support",
               "Multiculturally sensitive counseling",
               "LGBTQ+ & gender-affirming care",
               "Secure, private telehealth",
@@ -158,12 +172,14 @@ function Home() {
         </div>
       </section>
 
+      <AreasOfFocus />
+
       {/* Virtual Counseling */}
       <section className="bg-cream">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:items-center">
           <div>
             <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
-              Online therapy in Indiana
+              Online therapy in {LICENSED_STATES_SHORT}
             </p>
             <h2 className="mt-4 font-serif text-4xl text-evergreen md:text-5xl">
               Care from the comfort of your{" "}

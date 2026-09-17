@@ -46,22 +46,35 @@ export function InsuranceBanner() {
         <PillGroup label="Insurance" items={insurances} />
         <PillGroup label="Employee Assistance Programs" items={eaps} />
 
-        <div className="mx-auto mt-8 max-w-xl rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
-          <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
-            No insurance?
-          </p>
-          <p className="mt-2 text-sm text-cream/85">
-            Kelly offers reduced-fee sessions through{" "}
-            <a
-              href="https://openpathcollective.org"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-honey hover:underline"
-            >
-              Open Path Collective
-            </a>
-            .
-          </p>
+        <div className="mx-auto mt-8 grid max-w-3xl gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
+            <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
+              No insurance?
+            </p>
+            <p className="mt-2 text-sm text-cream/85">
+              Kelly offers reduced-fee sessions through{" "}
+              <a
+                href="https://openpathcollective.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-honey hover:underline"
+              >
+                Open Path Collective
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
+            <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
+              Veterans &amp; first responders
+            </p>
+            <p className="mt-2 text-sm text-cream/85">
+              Veterans and first responders receive a preferred rate. Mention
+              your service when you reach out and Kelly will take care of the
+              rest.
+            </p>
+          </div>
         </div>
 
         <p className="mt-6 text-xs text-cream/60">

@@ -3,6 +3,7 @@ import ripples from "@/assets/ripples.jpg";
 import { useState } from "react";
 import {
   SITE_URL,
+  LICENSED_STATES_TEXT,
   CONTACT_WEBHOOK_URL,
   KELLY_EMAIL,
   isConfigured,
@@ -15,8 +16,7 @@ export const Route = createFileRoute("/lets-get-real")({
       { title: "Let's Get Real | Real. Life Healing" },
       {
         name: "description",
-        content:
-          "Honest notes on therapy and healing from Kelly Day, LMHC, plus practice updates and mental health resources for Indiana.",
+        content: `Honest notes on therapy and healing from Kelly Day, LMHC, plus practice updates and mental health resources for ${LICENSED_STATES_TEXT}.`,
       },
       { property: "og:title", content: "Let's Get Real | Real. Life Healing" },
       {

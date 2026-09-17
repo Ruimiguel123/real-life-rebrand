@@ -1,5 +1,5 @@
 # Real. Life Healing — https://reallifehealing.care
-# Kelly Day, LMHC, NCC — telehealth counseling, State of Indiana
+# Kelly Day, LMHC, NCC — telehealth counseling in Indiana, Ohio, Georgia, Minnesota & Louisiana
 
 User-agent: *
 Allow: /

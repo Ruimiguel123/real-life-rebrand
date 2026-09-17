@@ -1,17 +1,37 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SITE_URL } from "@/config/simplepractice";
+import {
+  SITE_URL,
+  LICENSED_STATES_TEXT,
+  LICENSED_STATES_SHORT,
+} from "@/config/simplepractice";
 import beautifulDestinations from "@/assets/beautiful-destinations.jpg";
 import { BeginYourCare } from "@/components/BeginYourCare";
 import { InsuranceBanner } from "@/components/InsuranceBanner";
 
 const faqs = [
   {
-    q: "Does insurance cover online therapy in Indiana?",
-    a: "In most cases, yes. Real. Life Healing is in-network with Aetna, Anthem Blue Cross Blue Shield, United HealthCare, Optum, and Skai BCBS, and works with Employee Assistance Programs including Anthem EAP. Coverage is verified before your first session so there are no surprises.",
+    q: "Which states can I see Kelly from?",
+    a: `Kelly is licensed to provide telehealth counseling in ${LICENSED_STATES_TEXT}. You need to be physically located in one of those states at the time of your session.`,
+  },
+  {
+    q: "Does insurance cover online therapy?",
+    a: "In most cases, yes. Real. Life Healing is in-network with Aetna, Anthem Blue Cross Blue Shield, United HealthCare, Optum, and Skai BCBS, and works with Employee Assistance Programs including Anthem EAP. Coverage is verified before your first session so there are no surprises. Coverage can vary by state, so mention where you live when you reach out.",
   },
   {
     q: "What if I don't have insurance?",
     a: "Kelly offers reduced-fee sessions through Open Path Collective, a nonprofit network for affordable therapy. Reach out and we'll find a rate that works with your budget.",
+  },
+  {
+    q: "Is there a rate for veterans and first responders?",
+    a: "Yes. Veterans and first responders receive a preferred rate. Let Kelly know about your service when you reach out.",
+  },
+  {
+    q: "Do you work with family members of someone living with dementia or addiction?",
+    a: "Yes. Kelly offers dedicated support for spouses, adult children, siblings, and friends caring for someone with dementia, Alzheimer's disease, or addiction, including caregiver burnout, anticipatory grief, guilt, and boundary-setting.",
+  },
+  {
+    q: "Do you offer counseling for women's health concerns?",
+    a: "Yes. Kelly supports women through postpartum depression, premenopause, perimenopause, menopause and postmenopause, menstrual-cycle mood changes, hormone replacement therapy (HRT), puberty (ages 16+), and the emotional impact of a breast, cervical, or uterine cancer diagnosis. Counseling works alongside your medical care, not in place of it.",
   },
   {
     q: "What ages do you work with?",
@@ -41,16 +61,17 @@ export const Route = createFileRoute("/getting-started")({
   head: () => ({
     meta: [
       { property: "og:url", content: `${SITE_URL}/getting-started` },
-      { title: "Getting Started: Online Therapy in Indiana | Real. Life Healing" },
+      {
+        title: `Getting Started: Online Therapy in ${LICENSED_STATES_SHORT} | Real. Life Healing`,
+      },
       {
         name: "description",
-        content:
-          "How to begin therapy with Real. Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in Indiana.",
+        content: `How to begin therapy with Real. Life Healing. Request an appointment, meet Kelly Day, LMHC, and start affordable telehealth counseling in ${LICENSED_STATES_TEXT}.`,
       },
       { property: "og:title", content: "Getting Started | Real. Life Healing" },
       {
         property: "og:description",
-        content: "Three simple steps to begin affordable telehealth therapy in Indiana.",
+        content: `Three simple steps to begin affordable telehealth therapy in ${LICENSED_STATES_SHORT}.`,
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/getting-started` }],
@@ -124,14 +145,17 @@ function GettingStarted() {
         <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1fr_0.8fr] md:items-center">
           <div>
             <h2 className="font-serif text-3xl text-evergreen md:text-4xl">
-              Who I work with: telehealth counseling across Indiana
+              Who I work with: telehealth counseling across five states
             </h2>
             <p className="mt-4 text-forest">
-              Individuals, couples, and families across Indiana experiencing
-              emotional or psychological difficulties: anxiety, depression,
-              trauma, grief, and relationship strain. The practice is
-              multiculturally sensitive and gender-affirming; people of every
-              background and identity are welcome here.
+              Individuals, couples, and families in {LICENSED_STATES_TEXT}{" "}
+              experiencing emotional or psychological difficulties: anxiety,
+              depression, trauma, grief, and relationship strain. Kelly also
+              holds dedicated space for friends and family caring for someone
+              with dementia, Alzheimer's, or addiction, and for women
+              navigating postpartum depression, menopause, HRT, and cancer.
+              The practice is multiculturally sensitive and gender-affirming;
+              people of every background and identity are welcome here.
             </p>
           </div>
           <div>
@@ -139,8 +163,10 @@ function GettingStarted() {
               What sessions look like
             </h2>
             <p className="mt-4 text-forest">
-              Secure video telehealth from anywhere in Indiana: Indianapolis, Fort Wayne, Evansville, South Bend, Bloomington, and every community between. Sessions
-              typically run 45 to 60 minutes. We use Cognitive Behavioral Therapy (CBT) as our foundation, adding
+              Secure video telehealth from anywhere in {LICENSED_STATES_TEXT},
+              from Indianapolis and Columbus to Atlanta, Minneapolis, and New
+              Orleans, and every community between. Sessions typically run 45
+              to 60 minutes. We use Cognitive Behavioral Therapy (CBT) as our foundation, adding
               Eye Movement Desensitization and Reprocessing (EMDR) or trauma-informed approaches when they'll help you most.
             </p>
           </div>

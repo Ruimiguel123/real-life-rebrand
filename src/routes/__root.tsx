@@ -10,22 +10,27 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { SITE_URL, KELLY_EMAIL } from "@/config/simplepractice";
+import {
+  SITE_URL,
+  KELLY_EMAIL,
+  LICENSED_STATES,
+  LICENSED_STATES_TEXT,
+  LICENSED_STATES_SHORT,
+} from "@/config/simplepractice";
 
 const practiceJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
   "@id": `${SITE_URL}/#practice`,
   name: "Real. Life Healing",
-  description:
-    "Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling. Real, affordable telehealth for individuals, couples, and families across Indiana.",
+  description: `Client-centered Cognitive Behavioral Therapy (CBT), trauma and grief counseling, caregiver support, and women's health counseling. Real, affordable telehealth for individuals, couples, and families across ${LICENSED_STATES_TEXT}.`,
   url: SITE_URL,
   logo: `${SITE_URL}/apple-touch-icon.png`,
   image: `${SITE_URL}/og-image.jpg`,
   email: KELLY_EMAIL,
   telephone: "+1-317-918-3195",
   priceRange: "$$",
-  areaServed: { "@type": "State", name: "Indiana" },
+  areaServed: LICENSED_STATES.map((name) => ({ "@type": "State", name })),
   medicalSpecialty: "Psychiatric",
   founder: {
     "@type": "Person",
@@ -109,24 +114,30 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Real. Life Healing | Therapy & Counseling in Indiana" },
+      {
+        title: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+      },
       {
         name: "description",
-        content:
-          "Real, affordable therapy with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), Eye Movement Desensitization and Reprocessing (EMDR), trauma and grief counseling for individuals, couples, and families across Indiana.",
+        content: `Real, affordable therapy with Kelly Day, LMHC, NCC. Client-centered Cognitive Behavioral Therapy (CBT), Eye Movement Desensitization and Reprocessing (EMDR), trauma and grief counseling for individuals, couples, and families across ${LICENSED_STATES_TEXT}.`,
       },
       { name: "author", content: "Real. Life Healing" },
       { name: "theme-color", content: "#344338" },
       { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Real. Life Healing, online therapy in Indiana" },
+      {
+        property: "og:image:alt",
+        content: `Real. Life Healing, online therapy in ${LICENSED_STATES_SHORT}`,
+      },
       { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
-      { property: "og:title", content: "Real. Life Healing | Therapy & Counseling in Indiana" },
+      {
+        property: "og:title",
+        content: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+      },
       {
         property: "og:description",
-        content:
-          "Real, affordable therapy and sincere therapeutic healing, serving the State of Indiana since 2019.",
+        content: `Real, affordable therapy and sincere therapeutic healing. Serving Indiana since 2019, now licensed in ${LICENSED_STATES_TEXT}.`,
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

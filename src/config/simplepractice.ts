@@ -32,3 +32,27 @@ export const isConfigured = (url: string) => Boolean(url) && url !== "#";
 // already resolves here, and www 301s to it at Cloudflare.
 // Used for canonical URLs and structured data across every route.
 export const SITE_URL = "https://reallifehealing.care";
+
+// States where Kelly holds an active license to practice. Indiana is the
+// home state; the others were added September 2026. Every place the site
+// names a state (hero, footer, meta, JSON-LD, FAQ) derives from this list —
+// do not hardcode state names in routes or components.
+export const HOME_STATE = "Indiana";
+export const LICENSED_STATES = [
+  "Indiana",
+  "Ohio",
+  "Georgia",
+  "Minnesota",
+  "Louisiana",
+] as const;
+
+// "Indiana, Ohio, Georgia, Minnesota, and Louisiana"
+export const LICENSED_STATES_TEXT = `${LICENSED_STATES.slice(0, -1).join(", ")}, and ${
+  LICENSED_STATES[LICENSED_STATES.length - 1]
+}`;
+
+// Shorter form for tight spaces (hero kicker, footer, page titles)
+// "Indiana, Ohio, Georgia, Minnesota & Louisiana"
+export const LICENSED_STATES_SHORT = `${LICENSED_STATES.slice(0, -1).join(", ")} & ${
+  LICENSED_STATES[LICENSED_STATES.length - 1]
+}`;

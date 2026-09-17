@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { KELLY_EMAIL } from "@/config/simplepractice";
+import { KELLY_EMAIL, LICENSED_STATES_SHORT } from "@/config/simplepractice";
 
 export function SiteFooter() {
   return (
@@ -28,7 +28,7 @@ export function SiteFooter() {
 
         <div className="text-sm text-cream/80">
           <p className="font-serif text-cream text-lg">Kelly Day, LMHC, NCC</p>
-          <p className="mt-4">Telehealth for the State of Indiana</p>
+          <p className="mt-4">Telehealth for {LICENSED_STATES_SHORT}</p>
           <p className="mt-2">Serving clients since 2019</p>
           <a
             href="tel:+13179183195"
@@ -49,7 +49,7 @@ export function SiteFooter() {
       <div className="border-t border-cream/10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-cream/60 md:flex-row">
           <p>© {new Date().getFullYear()} Real. Life Healing. All rights reserved.</p>
-          <p>Indiana · Telehealth</p>
+          <p>{LICENSED_STATES_SHORT} · Telehealth</p>
         </div>
       </div>
     </footer>
