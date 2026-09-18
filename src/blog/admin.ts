@@ -255,7 +255,7 @@ ${
     </div>
     <div id="editor" class="editor js-only" contenteditable="true" data-placeholder="Paste or start writing…"></div>
     <textarea class="fallback nojs-only" name="body_html" placeholder="Paste or write your article. Leave a blank line between paragraphs.">${h(v.body_html)}</textarea>
-    <input type="hidden" name="body_html" value="">
+    <input type="hidden" id="body-html" name="body_html" value="">
   </div>
 
   <div class="field">

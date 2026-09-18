@@ -128,7 +128,10 @@ export const ADMIN_JS = /* js */ `
   var title = form.querySelector('[name=title]');
   var slug = form.querySelector('[name=slug]');
   var editor = document.getElementById('editor');
-  var hidden = form.querySelector('[name=body_html]');
+  // Two fields share the name body_html: the no-JS textarea and the hidden
+  // input the editor writes into. Select the hidden one by id, then strip
+  // the textarea's name so only the editor's content is submitted.
+  var hidden = document.getElementById('body-html');
   var fallback = form.querySelector('textarea.fallback');
   var slugTouched = slug.value.length > 0;
 
@@ -169,7 +172,11 @@ export const ADMIN_JS = /* js */ `
   // On submit, copy the editor's HTML into the hidden field. The server
   // sanitizes it to a small allow-list, so paste from Google Docs is fine.
   form.addEventListener('submit', function () {
-    if (editor) hidden.value = editor.innerHTML;
+    if (editor && hidden) {
+      // Treat an editor holding only whitespace/<br> as empty.
+      var text = (editor.textContent || '').replace(/\u00a0/g, ' ').trim();
+      hidden.value = text ? editor.innerHTML : '';
+    }
   });
 
   // Cover image preview
