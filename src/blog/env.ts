@@ -53,6 +53,28 @@ export interface BlogEnv {
 
 let currentEnv: BlogEnv = {};
 
+/**
+ * Find the Cloudflare bindings for this request.
+ *
+ * Nitro's Cloudflare entry receives (request, env, ctx) but calls the app
+ * with the request only, so the `env` argument that reaches src/server.ts
+ * is undefined. Nitro does stash the bindings in two places we can read:
+ * `globalThis.__env__` and `request.runtime.cloudflare.env`. Check the
+ * argument first (in case a future version passes it), then those.
+ */
+export function resolveEnv(envArg: unknown, request?: Request): BlogEnv {
+  const candidates: unknown[] = [
+    envArg,
+    (request as unknown as { runtime?: { cloudflare?: { env?: unknown } } } | undefined)?.runtime
+      ?.cloudflare?.env,
+    (globalThis as unknown as { __env__?: unknown }).__env__,
+  ];
+  for (const c of candidates) {
+    if (c && typeof c === "object" && Object.keys(c as object).length > 0) return c as BlogEnv;
+  }
+  return {};
+}
+
 export function setEnv(env: unknown) {
   if (env && typeof env === "object") currentEnv = env as BlogEnv;
 }
