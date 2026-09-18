@@ -1,0 +1,86 @@
+const insurances = [
+  "Aetna",
+  "Anthem Blue Cross Blue Shield",
+  "United HealthCare",
+  "Optum",
+  "Skai BCBS",
+];
+
+const eaps = ["Anthem EAP", "Employee Assistance Programs (EAP)"];
+
+function PillGroup({ label, items }: { label: string; items: string[] }) {
+  return (
+    <div className="mt-8">
+      <p className="font-display text-[0.65rem] uppercase tracking-[0.28em] text-cream/60">
+        {label}
+      </p>
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+        {items.map((name) => (
+          <span
+            key={name}
+            className="inline-flex items-center rounded-full border border-cream/20 bg-cream/10 px-5 py-2 text-sm font-medium text-cream"
+          >
+            {name}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function InsuranceBanner() {
+  return (
+    <section className="bg-evergreen text-cream">
+      <div className="mx-auto max-w-5xl px-6 py-16 text-center md:py-20">
+        <p className="font-display text-base uppercase tracking-[0.32em] text-honey md:text-lg">
+          Insurance accepted
+        </p>
+        <h2 className="mt-4 font-serif text-4xl md:text-5xl">
+          Kelly works with your budget
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl font-serif text-lg text-cream/85">
+          Real. Life Healing is an in-network provider with major carriers. Coverage
+          is verified before your first session so there are no surprises.
+        </p>
+
+        <PillGroup label="Insurance" items={insurances} />
+        <PillGroup label="Employee Assistance Programs" items={eaps} />
+
+        <div className="mx-auto mt-8 grid max-w-3xl gap-4 md:grid-cols-2">
+          <div className="rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
+            <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
+              No insurance?
+            </p>
+            <p className="mt-2 text-sm text-cream/85">
+              Kelly offers reduced-fee sessions through{" "}
+              <a
+                href="https://openpathcollective.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-honey hover:underline"
+              >
+                Open Path Collective
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-honey/40 bg-cream/5 px-6 py-5">
+            <p className="font-display text-lg uppercase tracking-[0.28em] text-honey md:text-xl">
+              Veterans &amp; first responders
+            </p>
+            <p className="mt-2 text-sm text-cream/85">
+              Veterans and first responders receive a preferred rate. Mention
+              your service when you reach out and Kelly will take care of the
+              rest.
+            </p>
+          </div>
+        </div>
+
+        <p className="mt-6 text-xs text-cream/60">
+          Not sure if your plan covers therapy? Reach out and we’ll check together.
+        </p>
+      </div>
+    </section>
+  );
+}

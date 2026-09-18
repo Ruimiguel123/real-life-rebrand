@@ -1,0 +1,72 @@
+##
+## Real. Life Healing — security headers
+## Place at the root of your static assets directory (alongside robots.txt).
+##
+## Cloudflare Workers Assets and Cloudflare Pages both read this file.
+## If your Worker serves responses from code rather than the assets binding,
+## use src/security-headers.ts instead — this file will be ignored.
+##
+## Five of the six headers below are enforced immediately and carry no
+## breakage risk. The sixth, Content-Security-Policy, is deliberately shipped
+## in Report-Only mode. See docs/security-headers.md for why, and for how to
+## flip it to enforcing once you've confirmed nothing breaks.
+##
+
+/*
+  ## Force HTTPS for a year. Note: includeSubDomains means every current and
+  ## future subdomain of reallifehealing.care must serve valid HTTPS.
+  ## "preload" is intentionally omitted — it is very hard to undo. See docs.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+  ## Clickjacking defence. CSP frame-ancestors supersedes this in modern
+  ## browsers; both are set because older browsers only understand this one.
+  X-Frame-Options: SAMEORIGIN
+
+  ## Stop the browser guessing content types.
+  X-Content-Type-Options: nosniff
+
+  ## Send only the origin to other sites, never the full path. On a mental
+  ## health practice site the path itself is sensitive: a third party should
+  ## never learn that a visitor came from a page about trauma counseling.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  ## Switch off browser features this site does not use. Camera and
+  ## microphone are denied because telehealth sessions happen on
+  ## SimplePractice, a different origin — this site never needs them.
+  Permissions-Policy: accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), usb=(), xr-spatial-tracking=()
+
+  ## Isolate this browsing context from anything it opens.
+  ## "allow-popups" is used rather than plain same-origin so the client portal
+  ## link and any Hushmail popup keep working.
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
+
+  ## Other origins cannot load this site's resources as subresources.
+  Cross-Origin-Resource-Policy: same-origin
+
+  ##
+  ## CSP — REPORT ONLY. Violations are logged to the browser console and
+  ## nothing is blocked. Tune this against real traffic, then swap the header
+  ## name to Content-Security-Policy to enforce.
+  ##
+  ## 'unsafe-inline' appears in script-src because server-rendered React
+  ## injects an inline hydration script. Removing it requires nonces, which
+  ## static asset serving cannot provide. See docs for the hash-based route.
+  ##
+  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://hushforms.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://hushforms.com; frame-src https://hushforms.com; form-action 'self' https://hushforms.com; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+##
+## Long-cache the fingerprinted build assets. Vite hashes these filenames,
+## so they can safely be cached forever — a content change produces a new
+## filename. Remove this block if your asset directory is not /assets/.
+##
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+##
+## Never cache the crawl-control files; you want edits picked up promptly.
+##
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600

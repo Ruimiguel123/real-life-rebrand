@@ -1,0 +1,38 @@
+// Cloudflare bindings for the blog backend.
+//
+// Nitro reads this file at build time and merges it into the generated
+// .output/server/wrangler.json (name, main, assets, compatibility_date are
+// set by the build — do not add them here or they are ignored with a warning).
+//
+// Three placeholders must be filled in before this deploys:
+//   database_id      — from Cloudflare → Storage & Databases → D1 → the database
+//   ACCESS_TEAM_DOMAIN — Zero Trust → Settings → Custom Pages → team domain
+//   ACCESS_AUD       — Zero Trust → Access → Applications → the app → Overview → Application Audience (AUD) Tag
+// See docs/blog-admin-setup.md for the full walkthrough.
+{
+  "$schema": "https://unpkg.com/wrangler/config-schema.json",
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "rlh-blog",
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+
+  "r2_buckets": [
+    {
+      "binding": "MEDIA",
+      "bucket_name": "rlh-media"
+    }
+  ],
+
+  "vars": {
+    // Team domain WITHOUT https://, e.g. "reallifehealing.cloudflareaccess.com"
+    "ACCESS_TEAM_DOMAIN": "REPLACE_WITH_TEAM_DOMAIN",
+    // Application Audience tag (64 hex chars) — not a secret
+    "ACCESS_AUD": "REPLACE_WITH_ACCESS_AUD",
+    // Optional extra allow-list. Leave empty to trust the Access policy alone.
+    "ADMIN_EMAILS": ""
+  }
+}
