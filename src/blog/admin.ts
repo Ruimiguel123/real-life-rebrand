@@ -445,13 +445,16 @@ export async function handleBackendRequest(
   if (path !== "/admin" && !path.startsWith("/admin/")) return null;
 
   // Public assets for the admin shell
+  // no-cache = the browser may keep a copy but must check with the server
+  // before using it, so a fix deploys on the next plain reload. These files
+  // are a few KB; the round-trip is cheap.
   if (path === "/admin/admin.css")
     return new Response(ADMIN_CSS, {
-      headers: { "content-type": "text/css; charset=utf-8", "cache-control": "public, max-age=3600" },
+      headers: { "content-type": "text/css; charset=utf-8", "cache-control": "no-cache" },
     });
   if (path === "/admin/admin.js")
     return new Response(ADMIN_JS, {
-      headers: { "content-type": "text/javascript; charset=utf-8", "cache-control": "public, max-age=3600" },
+      headers: { "content-type": "text/javascript; charset=utf-8", "cache-control": "no-cache" },
     });
 
   // Everything else: authenticated
