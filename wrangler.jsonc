@@ -33,7 +33,7 @@
     // Application Audience tag (64 hex chars) — not a secret
     "ACCESS_AUD": "a897c3cb3d0ff39a3589c9fe1afa6dd9f78ec801815ec85d12fb22658ffb5151",
     // Optional extra allow-list. Leave empty to trust the Access policy alone.
-    "ADMIN_EMAILS": ""
+    "ADMIN_EMAILS": "info@digitalexpert.ca, kellyday@reallifehealing.care, kelly.daylmhc@gmail.com"
   },
   "observability": {
     "enabled": true
