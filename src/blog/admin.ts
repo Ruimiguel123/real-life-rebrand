@@ -241,7 +241,7 @@ ${
 
   <div class="field">
     <label>Article</label>
-    <div class="toolbar nojs">
+    <div class="toolbar js-only">
       <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
       <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
       <button type="button" data-cmd="formatBlock" data-value="h2">Heading</button>
@@ -253,7 +253,7 @@ ${
       <button type="button" data-cmd="createLink">Link</button>
       <button type="button" data-cmd="removeFormat">Clear formatting</button>
     </div>
-    <div id="editor" class="editor nojs" contenteditable="true" data-placeholder="Paste or start writing…"></div>
+    <div id="editor" class="editor js-only" contenteditable="true" data-placeholder="Paste or start writing…"></div>
     <textarea class="fallback nojs-only" name="body_html" placeholder="Paste or write your article. Leave a blank line between paragraphs.">${h(v.body_html)}</textarea>
     <input type="hidden" name="body_html" value="">
   </div>

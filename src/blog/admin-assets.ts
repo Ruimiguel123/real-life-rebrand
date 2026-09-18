@@ -90,7 +90,14 @@ h2 { font-family: Spectral, Georgia, serif; font-weight: 400; font-size: 1.35rem
 .editor blockquote { border-left: 3px solid var(--honey); margin: 1rem 0; padding: .25rem 1rem; color: var(--forest); }
 .editor a { color: var(--forest); }
 textarea.fallback { min-height: 26rem; font-family: Spectral, Georgia, serif; font-size: 1.05rem; line-height: 1.7; }
-.js .nojs { display: none; } .nojs-only { display: block; } .js .nojs-only { display: none; }
+/* Progressive enhancement: the visual editor and toolbar only appear once
+   admin.js has run (it adds .js to <html>); the plain textarea is the
+   no-JavaScript fallback and is hidden when the editor is available. */
+.js-only { display: none; }
+.js .js-only { display: block; }
+.js .toolbar.js-only { display: flex; }
+.nojs-only { display: block; }
+.js .nojs-only { display: none; }
 .cover-preview { display: block; max-width: 100%; max-height: 16rem; border-radius: .75rem; margin-bottom: .75rem; object-fit: cover; }
 .cover-row { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 .cover-row label.inline { display: inline-flex; align-items: center; gap: .4rem; text-transform: none; letter-spacing: 0; font-size: .9rem; margin: 0; }
