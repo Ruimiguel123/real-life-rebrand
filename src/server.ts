@@ -3,7 +3,7 @@ import "./lib/error-capture";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { withSecurityHeaders } from "./security-headers";
-import { setEnv } from "./blog/env";
+import { setEnv, resolveEnv } from "./blog/env";
 import { handleBackendRequest } from "./blog/admin";
 
 type ServerEntry = {
@@ -58,13 +58,16 @@ export default {
     // being committed and deployed. Both are kept — _headers covers /assets/*
     // and the crawl files, this covers the pages.
     try {
-      // Cloudflare bindings (D1, R2, Access vars) for the blog. Stashed so
-      // TanStack server functions can reach them; see src/blog/env.ts.
-      setEnv(env);
+      // Cloudflare bindings (D1, R2, Access vars) for the blog. Nitro does
+      // not pass `env` through to this entry, so resolveEnv() finds the
+      // bindings where Nitro leaves them. Stashed so TanStack server
+      // functions can reach them too; see src/blog/env.ts.
+      const bindings = resolveEnv(env, request);
+      setEnv(bindings);
 
       // Blog backend: /admin, /media, /sitemap.xml. Returns null for
       // anything else, which falls through to the React app below.
-      const backend = await handleBackendRequest(request, env as never);
+      const backend = await handleBackendRequest(request, bindings);
       if (backend) return withSecurityHeaders(backend);
 
       const handler = await getServerEntry();
