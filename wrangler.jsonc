@@ -35,4 +35,7 @@
     // Optional extra allow-list. Leave empty to trust the Access policy alone.
     "ADMIN_EMAILS": ""
   }
+ "observability": {
+    "enabled": true
+  }
 }
