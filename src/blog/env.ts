@@ -80,5 +80,8 @@ export function setEnv(env: unknown) {
 }
 
 export function getEnv(): BlogEnv {
-  return currentEnv;
+  if (Object.keys(currentEnv).length > 0) return currentEnv;
+  // Belt and braces: if setEnv() never ran in this module instance, read
+  // the bindings straight from where Nitro leaves them.
+  return resolveEnv(undefined);
 }
