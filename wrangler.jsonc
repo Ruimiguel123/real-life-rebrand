@@ -27,15 +27,15 @@
     }
   ],
 
-  "vars": {
+   "vars": {
     // Team domain WITHOUT https://, e.g. "reallifehealing.cloudflareaccess.com"
     "ACCESS_TEAM_DOMAIN": "cool-lake-efd7.cloudflareaccess.com",
-     // Application Audience tag (64 hex chars) — not a secret
+    // Application Audience tag (64 hex chars) — not a secret
     "ACCESS_AUD": "a897c3cb3d0ff39a3589c9fe1afa6dd9f78ec801815ec85d12fb22658ffb5151",
     // Optional extra allow-list. Leave empty to trust the Access policy alone.
     "ADMIN_EMAILS": ""
-  }
- "observability": {
+  },
+  "observability": {
     "enabled": true
   }
 }
