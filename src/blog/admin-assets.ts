@@ -118,7 +118,8 @@ export const ADMIN_JS = /* js */ `
   // the admin keeps working once 'unsafe-inline' leaves script-src.
   document.querySelectorAll('form[data-confirm]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
-      if (!window.confirm('Delete this post? This cannot be undone.')) e.preventDefault();
+      var msg = f.getAttribute('data-confirm') || 'Delete this post? This cannot be undone.';
+      if (!window.confirm(msg)) e.preventDefault();
     });
   });
 

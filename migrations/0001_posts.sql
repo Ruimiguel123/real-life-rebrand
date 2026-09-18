@@ -1,6 +1,7 @@
--- Real. Life Healing blog: run once against the D1 database.
+-- Real. Life Healing blog + newsletter: run once against the D1 database.
 -- The Worker also runs this automatically (CREATE ... IF NOT EXISTS) the
--- first time /admin is opened, so this file is for reference / manual setup.
+-- first time /admin or the subscribe endpoint is used, so this file is for
+-- reference / manual setup.
 
 CREATE TABLE IF NOT EXISTS posts (
   id           TEXT PRIMARY KEY,
@@ -16,3 +17,11 @@ CREATE TABLE IF NOT EXISTS posts (
   published_at TEXT
 );
 CREATE INDEX IF NOT EXISTS posts_status_published ON posts (status, published_at DESC);
+CREATE TABLE IF NOT EXISTS subscribers (
+  id              TEXT PRIMARY KEY,
+  email           TEXT NOT NULL UNIQUE,
+  status          TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active','unsubscribed')),
+  source          TEXT NOT NULL DEFAULT 'lets-get-real',
+  created_at      TEXT NOT NULL,
+  unsubscribed_at TEXT
+);

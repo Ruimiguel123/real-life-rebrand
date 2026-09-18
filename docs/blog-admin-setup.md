@@ -120,7 +120,8 @@ post list. If you want to be certain, disable the workers.dev route
 ## Day-to-day, for Kelly
 
 - Go to **reallifehealing.care/admin**. Enter your email, then the code
-  from your inbox.
+  from your inbox. **Sign out** is in the top bar; sessions also expire on
+  their own after 24 hours.
 - **New post** → give it a title → paste your article → **Publish**.
   Bold, italics, headings, bullet lists and links come through from Google
   Docs or Word. Colours, fonts and spacing don't, on purpose, so every
@@ -138,6 +139,35 @@ post list. If you want to be certain, disable the workers.dev route
 
 Nothing Kelly writes here should contain client information. Articles are
 public. The admin is not a place for notes about people.
+
+## Newsletter signups
+
+The "Stay in touch" form on Let's Get Real and the signup on /links both
+post to `/api/subscribe`, which stores the address in the same D1 database
+(`subscribers` table). Nothing is emailed automatically.
+
+- **Admin → Subscribers** lists every address with status and signup date,
+  and has **Download active list (CSV)**.
+- **reallifehealing.care/unsubscribe** is a public page where anyone can
+  remove themselves. Unsubscribed addresses stay in the table (marked) so
+  they don't get re-imported by accident; **Remove** in the admin deletes
+  the row entirely.
+- Signups are single opt-in with a honeypot field and a same-origin check.
+  Duplicate and invalid submissions get the same "ok" response as new ones
+  so the endpoint can't be used to test whether an address is on the list.
+
+### Sending a newsletter (Kelly)
+
+1. Admin → Subscribers → Download active list.
+2. Compose in your mail client. Put every address in **BCC**. Never To/CC.
+3. Include the line: *To stop receiving these, visit
+   reallifehealing.care/unsubscribe.*
+4. Before each send, download a fresh list so recent unsubscribes are honoured.
+
+Once the list is bigger than a mail client handles comfortably (roughly a
+few hundred), import the CSV into a proper newsletter tool. Any of them
+accept this CSV. Check the tool's HIPAA/BAA position first if the newsletter
+will be sent from the practice's name.
 
 ## Operations
 

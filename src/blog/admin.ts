@@ -1,7 +1,13 @@
 /**
- * admin.ts — the blog backend.
+ * admin.ts — the blog + newsletter backend.
  *
  * Plugged into src/server.ts ahead of the TanStack handler. Owns:
+ *
+ *   /api/subscribe          POST — newsletter signup (public, same-origin)
+ *   /api/unsubscribe        POST — remove an address (public, same-origin)
+ *   /unsubscribe            GET  — the page with the unsubscribe form
+ *   /admin/subscribers      list, with per-row remove
+ *   /admin/subscribers.csv  download of active addresses
  *
  *   /admin              list of posts (drafts + published)
  *   /admin/new          editor, new post
@@ -36,6 +42,12 @@ import {
   setStatus,
   deletePost,
   slugTaken,
+  addSubscriber,
+  unsubscribe,
+  listSubscribers,
+  deleteSubscriber,
+  normalizeEmail,
+  looksLikeEmail,
   type Post,
   type PostSummary,
   type PostStatus,
@@ -113,6 +125,7 @@ function layout(opts: {
     <nav>
       <a href="/admin">Posts</a>
       <a href="/admin/new">New post</a>
+      <a href="/admin/subscribers">Subscribers</a>
       <a href="/lets-get-real" target="_blank" rel="noopener">View blog ↗</a>
       <a href="/cdn-cgi/access/logout">Sign out</a>
     </nav>
@@ -302,6 +315,157 @@ function pagePreview(post: Post, who: AccessIdentity): string {
   return layout({ title: `Preview: ${post.title}`, body, who });
 }
 
+function pageSubscribers(
+  subs: Awaited<ReturnType<typeof listSubscribers>>,
+  who: AccessIdentity,
+  flash: { removed?: string },
+): string {
+  const active = subs.filter((s) => s.status === "active");
+  const rows = subs
+    .map(
+      (s) => `<li class="card post-row">
+  <div>
+    <span class="title" style="font-family:inherit;font-size:1rem">${h(s.email)}</span>
+    <div class="meta">
+      <span class="pill ${s.status === "active" ? "published" : "draft"}">${s.status}</span>
+      <span>${s.status === "active" ? `Signed up ${fmtDate(s.created_at)}` : `Unsubscribed ${fmtDate(s.unsubscribed_at)}`}</span>
+    </div>
+  </div>
+  <div class="actions">
+    <form method="post" action="/admin/subscribers/delete/${h(s.id)}" data-confirm="Remove this address completely?">
+      <button class="btn btn-quiet btn-danger" type="submit">Remove</button>
+    </form>
+  </div>
+</li>`,
+    )
+    .join("\n");
+
+  const body = `<h1>Subscribers</h1>
+<p class="lead">${active.length} active ${active.length === 1 ? "address" : "addresses"}${subs.length !== active.length ? `, ${subs.length - active.length} unsubscribed` : ""}. People sign up from the form on Let's Get Real and can remove themselves at <a href="/unsubscribe" target="_blank" rel="noopener">reallifehealing.care/unsubscribe</a>.</p>
+${flash.removed ? `<div class="notice">Address removed.</div>` : ""}
+<p style="margin:0 0 1.5rem"><a class="btn btn-primary" href="/admin/subscribers.csv">Download active list (CSV)</a></p>
+<div class="notice">When you send a newsletter, put the addresses in <strong>BCC</strong>, never To or CC, and include the line <em>"To stop receiving these, visit reallifehealing.care/unsubscribe"</em>. Check here for unsubscribes before each send.</div>
+${
+  subs.length
+    ? `<ul class="posts">${rows}</ul>`
+    : `<div class="card empty"><p>No subscribers yet.</p></div>`
+}`;
+  return layout({ title: "Subscribers", body, who });
+}
+
+/** Public page: a small form to leave the list. Server-rendered, no JS. */
+function pageUnsubscribe(state: "form" | "done" | "invalid"): string {
+  const inner =
+    state === "done"
+      ? `<h1>You're unsubscribed</h1>
+<p class="lead">If that address was on the list, it has been removed and you won't hear from us again. Take care.</p>
+<p><a class="btn btn-secondary" href="/">Back to the site</a></p>`
+      : `<h1>Unsubscribe</h1>
+<p class="lead">Enter the email address you signed up with and we'll take it off the list.</p>
+${state === "invalid" ? `<ul class="error-list"><li class="error">That doesn't look like an email address.</li></ul>` : ""}
+<form method="post" action="/api/unsubscribe" class="card" style="max-width:28rem">
+  <div class="field">
+    <label for="email">Email address</label>
+    <input type="text" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@email.com">
+  </div>
+  <input type="hidden" name="redirect" value="1">
+  <button class="btn btn-primary" type="submit">Unsubscribe</button>
+</form>`;
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Unsubscribe · Real. Life Healing</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+<header class="bar"><div class="wrap"><div class="brand"><a href="/" style="color:inherit;text-decoration:none">Real. Life Healing</a></div></div></header>
+<main class="wrap">${inner}</main>
+</body>
+</html>`;
+}
+
+async function handleSubscribe(request: Request, env: BlogEnv): Promise<Response> {
+  const json = (body: unknown, status = 200) =>
+    new Response(JSON.stringify(body), {
+      status,
+      headers: { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" },
+    });
+
+  if (!isSameOriginRequest(request)) return json({ ok: false, error: "forbidden" }, 403);
+  if (!env.DB) return json({ ok: false, error: "unavailable" }, 503);
+
+  let email = "";
+  let honeypot = "";
+  let source = "lets-get-real";
+  const ct = request.headers.get("content-type") ?? "";
+  try {
+    if (ct.includes("application/json")) {
+      const data = (await request.json()) as { email?: unknown; website?: unknown; source?: unknown };
+      email = typeof data.email === "string" ? data.email : "";
+      honeypot = typeof data.website === "string" ? data.website : "";
+      if (typeof data.source === "string" && /^[a-z-]{1,40}$/.test(data.source)) source = data.source;
+    } else {
+      const fd = await request.formData();
+      email = String(fd.get("email") ?? "");
+      honeypot = String(fd.get("website") ?? "");
+    }
+  } catch {
+    return json({ ok: false, error: "bad request" }, 400);
+  }
+
+  // Bots fill every field; humans never see this one.
+  if (honeypot) return json({ ok: true });
+
+  email = normalizeEmail(email);
+  if (!looksLikeEmail(email)) return json({ ok: false, error: "invalid email" }, 400);
+
+  await ensureSchema(env.DB);
+  await addSubscriber(env.DB, email, source);
+  // Same answer whether new, existing or re-activated: don't leak membership.
+  return json({ ok: true });
+}
+
+async function handleUnsubscribe(request: Request, env: BlogEnv): Promise<Response> {
+  if (!isSameOriginRequest(request)) return new Response("Forbidden", { status: 403 });
+  const fd = await request.formData();
+  const email = normalizeEmail(String(fd.get("email") ?? ""));
+  const wantsPage = fd.get("redirect") === "1";
+  if (!looksLikeEmail(email)) {
+    return wantsPage
+      ? html(pageUnsubscribe("invalid"), 400, { "x-robots-tag": "noindex" })
+      : new Response(JSON.stringify({ ok: false, error: "invalid email" }), {
+          status: 400,
+          headers: { "content-type": "application/json" },
+        });
+  }
+  if (env.DB) {
+    await ensureSchema(env.DB);
+    await unsubscribe(env.DB, email);
+  }
+  return wantsPage
+    ? html(pageUnsubscribe("done"), 200)
+    : new Response(JSON.stringify({ ok: true }), { headers: { "content-type": "application/json" } });
+}
+
+function subscribersCsv(subs: Awaited<ReturnType<typeof listSubscribers>>): Response {
+  const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
+  const lines = [
+    "email,signed_up",
+    ...subs.filter((s) => s.status === "active").map((s) => `${esc(s.email)},${esc(s.created_at.slice(0, 10))}`),
+  ];
+  return new Response(lines.join("\r\n") + "\r\n", {
+    headers: {
+      "content-type": "text/csv; charset=utf-8",
+      "content-disposition": `attachment; filename="rlh-subscribers-${new Date().toISOString().slice(0, 10)}.csv"`,
+      "cache-control": "no-store",
+    },
+  });
+}
+
 // ───────────────────────────────────────────────────────────── handlers ──
 
 async function handleSave(
@@ -437,6 +601,20 @@ export async function handleBackendRequest(
 
   if (path === "/sitemap.xml") return serveSitemap(env);
 
+  // Newsletter — public
+  if (path === "/api/subscribe") {
+    if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+    return handleSubscribe(request, env);
+  }
+  if (path === "/api/unsubscribe") {
+    if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
+    return handleUnsubscribe(request, env);
+  }
+  if (path === "/unsubscribe") {
+    if (request.method !== "GET" && request.method !== "HEAD") return null;
+    return html(pageUnsubscribe("form"), 200);
+  }
+
   if (path.startsWith("/media/")) {
     if (request.method !== "GET" && request.method !== "HEAD") return null;
     return serveMedia(env, decodeURIComponent(path.slice("/media/".length)));
@@ -475,6 +653,13 @@ export async function handleBackendRequest(
           deleted: url.searchParams.get("deleted") ?? undefined,
         }),
       );
+    }
+    if (path === "/admin/subscribers") {
+      const subs = await listSubscribers(db);
+      return html(pageSubscribers(subs, who, { removed: url.searchParams.get("removed") ?? undefined }));
+    }
+    if (path === "/admin/subscribers.csv") {
+      return subscribersCsv(await listSubscribers(db));
     }
     if (path === "/admin/new") {
       return html(
@@ -525,6 +710,12 @@ export async function handleBackendRequest(
         return redirect(`/admin/edit/${post.id}`);
       await setStatus(db, post.id, next);
       return redirect(`/admin?saved=${encodeURIComponent(post.slug)}&status=${next}`);
+    }
+
+    const subDel = path.match(/^\/admin\/subscribers\/delete\/([0-9a-f-]{36})$/);
+    if (subDel) {
+      await deleteSubscriber(db, subDel[1]);
+      return redirect("/admin/subscribers?removed=1");
     }
 
     const del = path.match(/^\/admin\/delete\/([0-9a-f-]{36})$/);

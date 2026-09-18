@@ -12,6 +12,9 @@ export const SIMPLEPRACTICE_PORTAL_URL = "https://kelly-day.clientsecure.me";
 // Make.com custom webhook. Handles BOTH the appointment form and the
 // newsletter signup - the payload includes a `type` field
 // ("appointment" | "newsletter") so a Router in Make can branch.
+// Unused since 2026-09-18: newsletter signups go to the site's own database
+// via POST /api/subscribe (src/blog/admin.ts). Kept only so nothing breaks
+// if an old import lingers; safe to delete once nothing references it.
 export const CONTACT_WEBHOOK_URL = "";
 
 // Where appointment requests land if the webhook isn't set up yet.

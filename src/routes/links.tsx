@@ -1,13 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import sanctuaryMark from "@/assets/sanctuary-mark.png";
-import {
-  SITE_URL,
-  SOCIAL_LINKS,
-  CONTACT_WEBHOOK_URL,
-  KELLY_EMAIL,
-  isConfigured,
-} from "@/config/simplepractice";
+import { SITE_URL, SOCIAL_LINKS, KELLY_EMAIL } from "@/config/simplepractice";
 
 export const Route = createFileRoute("/links")({
   head: () => ({
@@ -34,38 +28,21 @@ function LinksPage() {
     "idle",
   );
 
-  const subscribe = async (e: React.FormEvent) => {
+  // Same endpoint as the Let's Get Real form; see src/blog/admin.ts.
+  const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
-    if (!isConfigured(CONTACT_WEBHOOK_URL)) {
-      window.location.href = `mailto:${KELLY_EMAIL}?subject=${encodeURIComponent(
-        "Newsletter signup",
-      )}&body=${encodeURIComponent(`Please add me to the list: ${email}`)}`;
-      return;
-    }
+    const form = e.currentTarget;
+    const honeypot =
+      (form.elements.namedItem("website") as HTMLInputElement | null)?.value ?? "";
     setStatus("sending");
     try {
-      const payload = JSON.stringify({
-        type: "newsletter",
-        email,
-        source: "links-page",
-        submittedAt: new Date().toISOString(),
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website: honeypot, source: "links-page" }),
       });
-      try {
-        const res = await fetch(CONTACT_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-        });
-        if (!res.ok) throw new Error(String(res.status));
-      } catch {
-        await fetch(CONTACT_WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain" },
-          body: payload,
-        });
-      }
+      if (!res.ok) throw new Error(String(res.status));
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -128,7 +105,17 @@ function LinksPage() {
             className="mt-5 flex flex-col gap-3 sm:flex-row"
           >
             <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            />
+            <input
               type="email"
+              name="email"
+              autoComplete="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}

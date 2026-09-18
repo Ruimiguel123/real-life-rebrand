@@ -2,13 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import ripples from "@/assets/ripples.jpg";
 import { useState } from "react";
 import { fetchPublishedPosts } from "@/blog/server-fns";
-import {
-  SITE_URL,
-  LICENSED_STATES_TEXT,
-  CONTACT_WEBHOOK_URL,
-  KELLY_EMAIL,
-  isConfigured,
-} from "@/config/simplepractice";
+import { SITE_URL, LICENSED_STATES_TEXT, KELLY_EMAIL } from "@/config/simplepractice";
 
 export const Route = createFileRoute("/lets-get-real")({
   loader: () => fetchPublishedPosts(),
@@ -69,38 +63,22 @@ function LetsGetReal() {
     "idle",
   );
 
-  const subscribe = async (e: React.FormEvent) => {
+  // Signups go to the site's own database (see src/blog/admin.ts,
+  // POST /api/subscribe) and show up under Subscribers in /admin.
+  const subscribe = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
-    if (!isConfigured(CONTACT_WEBHOOK_URL)) {
-      // No webhook yet - send the signup to Kelly's inbox so nothing is lost.
-      window.location.href = `mailto:${KELLY_EMAIL}?subject=${encodeURIComponent(
-        "Newsletter signup",
-      )}&body=${encodeURIComponent(`Please add me to the list: ${email}`)}`;
-      return;
-    }
+    const form = e.currentTarget;
+    const honeypot =
+      (form.elements.namedItem("website") as HTMLInputElement | null)?.value ?? "";
     setStatus("sending");
     try {
-      const payload = JSON.stringify({
-        type: "newsletter",
-        email,
-        submittedAt: new Date().toISOString(),
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website: honeypot }),
       });
-      try {
-        const res = await fetch(CONTACT_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: payload,
-        });
-        if (!res.ok) throw new Error(String(res.status));
-      } catch {
-        await fetch(CONTACT_WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain" },
-          body: payload,
-        });
-      }
+      if (!res.ok) throw new Error(String(res.status));
       setStatus("sent");
     } catch {
       setStatus("error");
@@ -219,9 +197,21 @@ function LetsGetReal() {
             className="mx-auto mt-10 flex max-w-md flex-col gap-3 sm:flex-row"
             onSubmit={subscribe}
           >
+            {/* Honeypot: hidden from people, filled in by bots. Server drops any
+                submission where it has a value. */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+            />
             <input
               type="email"
+              name="email"
               required
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@email.com"
@@ -243,6 +233,15 @@ function LetsGetReal() {
           {status === "sent" && (
             <p className="mt-4 text-sm text-cream/70">
               You're on the list. We'll be in touch soon.
+            </p>
+          )}
+          {status !== "sent" && (
+            <p className="mt-6 text-xs text-cream/50">
+              Just an email address, nothing else. Leave any time at{" "}
+              <a href="/unsubscribe" className="underline hover:text-cream/80">
+                reallifehealing.care/unsubscribe
+              </a>
+              .
             </p>
           )}
           {status === "error" && (

@@ -34,6 +34,14 @@ CREATE TABLE IF NOT EXISTS posts (
   published_at TEXT
 );
 CREATE INDEX IF NOT EXISTS posts_status_published ON posts (status, published_at DESC);
+CREATE TABLE IF NOT EXISTS subscribers (
+  id              TEXT PRIMARY KEY,
+  email           TEXT NOT NULL UNIQUE,
+  status          TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active','unsubscribed')),
+  source          TEXT NOT NULL DEFAULT 'lets-get-real',
+  created_at      TEXT NOT NULL,
+  unsubscribed_at TEXT
+);
 `;
 
 const SUMMARY_COLS =
@@ -153,4 +161,82 @@ export async function setStatus(db: D1Database, id: string, status: PostStatus) 
 
 export async function deletePost(db: D1Database, id: string) {
   await db.prepare(`DELETE FROM posts WHERE id = ?1`).bind(id).run();
+}
+
+// ───────────────────────────────────────────────────────── subscribers ──
+
+export interface Subscriber {
+  id: string;
+  email: string;
+  status: "active" | "unsubscribed";
+  source: string;
+  created_at: string;
+  unsubscribed_at: string | null;
+}
+
+/** Normalise for storage/lookup: trim + lowercase. */
+export function normalizeEmail(raw: string): string {
+  return raw.trim().toLowerCase();
+}
+
+/** Loose but practical email check; the browser did the strict one. */
+export function looksLikeEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) && email.length <= 254;
+}
+
+/**
+ * Add a subscriber. Idempotent: an existing active address is left alone,
+ * an unsubscribed one is re-activated (they asked again). Returns whether
+ * a new row was created, for logging only — the caller should respond the
+ * same way either way so the endpoint can't be used to test addresses.
+ */
+export async function addSubscriber(
+  db: D1Database,
+  email: string,
+  source = "lets-get-real",
+): Promise<"created" | "reactivated" | "unchanged"> {
+  const now = new Date().toISOString();
+  const existing = await db
+    .prepare(`SELECT id, status FROM subscribers WHERE email = ?1`)
+    .bind(email)
+    .first<{ id: string; status: Subscriber["status"] }>();
+  if (!existing) {
+    await db
+      .prepare(
+        `INSERT INTO subscribers (id, email, status, source, created_at) VALUES (?1, ?2, 'active', ?3, ?4)`,
+      )
+      .bind(crypto.randomUUID(), email, source, now)
+      .run();
+    return "created";
+  }
+  if (existing.status === "unsubscribed") {
+    await db
+      .prepare(
+        `UPDATE subscribers SET status = 'active', unsubscribed_at = NULL, created_at = ?2 WHERE id = ?1`,
+      )
+      .bind(existing.id, now)
+      .run();
+    return "reactivated";
+  }
+  return "unchanged";
+}
+
+export async function unsubscribe(db: D1Database, email: string): Promise<void> {
+  await db
+    .prepare(
+      `UPDATE subscribers SET status = 'unsubscribed', unsubscribed_at = ?2 WHERE email = ?1 AND status = 'active'`,
+    )
+    .bind(email, new Date().toISOString())
+    .run();
+}
+
+export async function listSubscribers(db: D1Database): Promise<Subscriber[]> {
+  const { results } = await db
+    .prepare(`SELECT * FROM subscribers ORDER BY status ASC, created_at DESC`)
+    .all<Subscriber>();
+  return results;
+}
+
+export async function deleteSubscriber(db: D1Database, id: string): Promise<void> {
+  await db.prepare(`DELETE FROM subscribers WHERE id = ?1`).bind(id).run();
 }
