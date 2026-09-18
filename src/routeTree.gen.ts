@@ -13,7 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as GettingStartedRouteImport } from './routes/getting-started'
 import { Route as LetsGetRealRouteImport } from './routes/lets-get-real'
 import { Route as LinksRouteImport } from './routes/links'
-import { Route as LetsGetRealSlugRouteImport } from './routes/lets-get-real.$slug'
+import { Route as LetsGetRealSlugRouteImport } from './routes/lets-get-real_.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,22 +36,22 @@ const LinksRoute = LinksRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const LetsGetRealSlugRoute = LetsGetRealSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => LetsGetRealRoute,
+  id: '/lets-get-real_/$slug',
+  path: '/lets-get-real/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
-  '/lets-get-real': typeof LetsGetRealRouteWithChildren
+  '/lets-get-real': typeof LetsGetRealRoute
   '/links': typeof LinksRoute
   '/lets-get-real/$slug': typeof LetsGetRealSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
-  '/lets-get-real': typeof LetsGetRealRouteWithChildren
+  '/lets-get-real': typeof LetsGetRealRoute
   '/links': typeof LinksRoute
   '/lets-get-real/$slug': typeof LetsGetRealSlugRoute
 }
@@ -59,9 +59,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/getting-started': typeof GettingStartedRoute
-  '/lets-get-real': typeof LetsGetRealRouteWithChildren
+  '/lets-get-real': typeof LetsGetRealRoute
   '/links': typeof LinksRoute
-  '/lets-get-real/$slug': typeof LetsGetRealSlugRoute
+  '/lets-get-real_/$slug': typeof LetsGetRealSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -84,14 +84,15 @@ export interface FileRouteTypes {
     | '/getting-started'
     | '/lets-get-real'
     | '/links'
-    | '/lets-get-real/$slug'
+    | '/lets-get-real_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GettingStartedRoute: typeof GettingStartedRoute
-  LetsGetRealRoute: typeof LetsGetRealRouteWithChildren
+  LetsGetRealRoute: typeof LetsGetRealRoute
   LinksRoute: typeof LinksRoute
+  LetsGetRealSlugRoute: typeof LetsGetRealSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -124,33 +125,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LinksRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/lets-get-real/$slug': {
-      id: '/lets-get-real/$slug'
-      path: '/$slug'
+    '/lets-get-real_/$slug': {
+      id: '/lets-get-real_/$slug'
+      path: '/lets-get-real/$slug'
       fullPath: '/lets-get-real/$slug'
       preLoaderRoute: typeof LetsGetRealSlugRouteImport
-      parentRoute: typeof LetsGetRealRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface LetsGetRealRouteChildren {
-  LetsGetRealSlugRoute: typeof LetsGetRealSlugRoute
-}
-
-const LetsGetRealRouteChildren: LetsGetRealRouteChildren = {
-  LetsGetRealSlugRoute: LetsGetRealSlugRoute,
-}
-
-const LetsGetRealRouteWithChildren = LetsGetRealRoute._addFileChildren(
-  LetsGetRealRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GettingStartedRoute: GettingStartedRoute,
-  LetsGetRealRoute: LetsGetRealRouteWithChildren,
+  LetsGetRealRoute: LetsGetRealRoute,
   LinksRoute: LinksRoute,
+  LetsGetRealSlugRoute: LetsGetRealSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
