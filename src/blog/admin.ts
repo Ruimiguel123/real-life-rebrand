@@ -114,6 +114,7 @@ function layout(opts: {
       <a href="/admin">Posts</a>
       <a href="/admin/new">New post</a>
       <a href="/lets-get-real" target="_blank" rel="noopener">View blog ↗</a>
+      <a href="/cdn-cgi/access/logout">Sign out</a>
     </nav>
   </div>
 </header>
