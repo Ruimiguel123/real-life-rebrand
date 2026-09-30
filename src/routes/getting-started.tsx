@@ -62,7 +62,7 @@ export const Route = createFileRoute("/getting-started")({
     meta: [
       { property: "og:url", content: `${SITE_URL}/getting-started` },
       {
-        title: `Getting Started: Online Therapy in ${LICENSED_STATES_SHORT} | Real. Life Healing`,
+        title: "Getting Started with Online Therapy | Real. Life Healing",
       },
       {
         name: "description",

@@ -142,7 +142,24 @@ export const ADMIN_JS = /* js */ `
   }
   title.addEventListener('input', function () {
     if (!slugTouched) slug.value = slugify(title.value);
+    updateCount();
   });
+
+  // Live title length: green under 45, amber to 60, red beyond.
+  var countEl = document.getElementById('title-count');
+  function updateCount() {
+    if (!countEl) return;
+    var n = title.value.replace(/\s+/g, ' ').trim().length;
+    var msg = n + ' characters';
+    var color = '';
+    if (n > 60) { msg += ' (too long, Google will cut it off)'; color = '#8a3b2f'; }
+    else if (n > 45) { msg += ' (fine, practice name will be left off in Google)'; color = '#8a6a1f'; }
+    else if (n > 0) { msg += ' (good)'; color = '#3f6b4a'; }
+    countEl.textContent = n ? msg : '';
+    countEl.style.color = color;
+    countEl.style.fontWeight = n ? '600' : '';
+  }
+  updateCount();
   slug.addEventListener('input', function () { slugTouched = slug.value.length > 0; });
   slug.addEventListener('blur', function () { slug.value = slugify(slug.value); });
 

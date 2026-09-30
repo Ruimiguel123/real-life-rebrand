@@ -25,6 +25,35 @@ export const Route = createFileRoute("/lets-get-real")({
   component: LetsGetReal,
 });
 
+// Topics the blog covers — mirrors the practice's areas of focus, and gives
+// the index page real text of its own rather than only a list of links.
+const topics = [
+  {
+    name: "Grief and loss",
+    text: "Why grief rarely follows neat stages, and how to carry it without being swallowed by it.",
+  },
+  {
+    name: "Trauma and healing",
+    text: "What trauma-informed care and EMDR actually involve, and what change can feel like from the inside.",
+  },
+  {
+    name: "Caring for someone you love",
+    text: "Support for spouses, children, and friends of people living with dementia, Alzheimer's disease, or addiction.",
+  },
+  {
+    name: "Women's health",
+    text: "The emotional side of postpartum, perimenopause and menopause, hormone therapy, and a cancer diagnosis.",
+  },
+  {
+    name: "Starting therapy",
+    text: "What a first session looks like, how insurance works, and whether telehealth is a good fit for you.",
+  },
+  {
+    name: "Everyday mental health",
+    text: "Anxiety, relationships, boundaries, and the small habits that make hard seasons a little lighter.",
+  },
+];
+
 // Shown only until Kelly publishes her first article from /admin.
 const comingSoon = [
   {
@@ -99,6 +128,36 @@ function LetsGetReal() {
             Honest notes on therapy, healing, and everyday life, plus updates,
             resources, and the occasional package deal.
           </p>
+        </div>
+      </section>
+
+      <section className="bg-cream pb-20">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="rounded-3xl bg-sand/60 p-8 text-evergreen md:p-12">
+            <h2 className="font-serif text-3xl md:text-4xl">What you'll find here</h2>
+            <p className="mt-4 leading-relaxed text-forest">
+              Let's Get Real is where Kelly Day, LMHC, NCC, writes in plain
+              language about the things people bring into the therapy room.
+              No jargon, no pressure, just an honest look at what healing can
+              look like in real life.
+            </p>
+            <ul className="mt-6 grid gap-4 text-forest md:grid-cols-2">
+              {topics.map((t) => (
+                <li key={t.name} className="rounded-2xl bg-cream px-5 py-4">
+                  <p className="font-serif text-lg text-evergreen">{t.name}</p>
+                  <p className="mt-1 text-sm leading-relaxed">{t.text}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-sm leading-relaxed text-forest/80">
+              Articles are for general information and are not a substitute
+              for care. If something here lands close to home,{" "}
+              <Link to="/getting-started" hash="begin" className="text-honey hover:underline">
+                reach out
+              </Link>
+              . Kelly offers online therapy in {LICENSED_STATES_TEXT}.
+            </p>
+          </div>
         </div>
       </section>
 

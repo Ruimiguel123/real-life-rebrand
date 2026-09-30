@@ -15,9 +15,14 @@ export const Route = createFileRoute("/lets-get-real_/$slug")({
     const image = post.cover_url
       ? `${SITE_URL}${post.cover_url}`
       : `${SITE_URL}/og-image.jpg`;
+    // Google shows roughly 60-65 characters of a title. Add the practice
+    // name only when it still fits; otherwise the article title stands alone
+    // (the byline and brand are on the page itself).
+    const branded = `${post.title} | Real. Life Healing`;
+    const pageTitle = branded.length <= 65 ? branded : post.title;
     return {
       meta: [
-        { title: `${post.title} | Real. Life Healing` },
+        { title: pageTitle },
         { name: "description", content: post.excerpt },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },

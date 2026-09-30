@@ -244,6 +244,7 @@ ${
   <div class="field">
     <label for="title">Title</label>
     <input class="title" type="text" id="title" name="title" required maxlength="140" value="${h(v.title)}" placeholder="Grief doesn't move in a line">
+    <p class="hint">Aim for under 45 characters so Google shows it in full. Don't add your name or the practice name. Both appear on the article automatically. <span id="title-count" aria-live="polite"></span></p>
   </div>
 
   <div class="field">
@@ -482,7 +483,8 @@ async function handleSave(
 
   const id = get("id").trim() || crypto.randomUUID();
   const isNew = !(await getById(db, id));
-  const title = get("title").trim();
+  // Collapse runs of spaces/tabs/newlines left over from pasting.
+  const title = get("title").replace(/\s+/g, " ").trim();
   let slug = slugify(get("slug").trim() || title);
   const body_html = sanitizeHtml(get("body_html"));
   let excerpt = get("excerpt").trim();
@@ -563,7 +565,8 @@ async function serveMedia(env: BlogEnv, key: string): Promise<Response> {
 }
 
 async function serveSitemap(env: BlogEnv): Promise<Response> {
-  const staticRoutes = ["/", "/getting-started", "/lets-get-real", "/links"];
+  // /links is noindex (link-in-bio page), so it's left out of the sitemap.
+  const staticRoutes = ["/", "/getting-started", "/lets-get-real"];
   let posts: PostSummary[] = [];
   if (env.DB) {
     try {

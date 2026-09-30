@@ -114,7 +114,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        title: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+        title: "Real. Life Healing | Online Therapy with Kelly Day, LMHC",
       },
       {
         name: "description",

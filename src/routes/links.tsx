@@ -7,13 +7,17 @@ export const Route = createFileRoute("/links")({
   head: () => ({
     meta: [
       { property: "og:url", content: `${SITE_URL}/links` },
-      { title: "Links | Real. Life Healing" },
+      { title: "Connect with Kelly Day, LMHC | Real. Life Healing" },
+      // Link-in-bio page for Instagram/TikTok. Deliberately kept out of
+      // search results: it has almost no text of its own and would only
+      // compete with the homepage. It still passes link value (follow).
+      { name: "robots", content: "noindex, follow" },
       {
         name: "description",
         content:
           "Find Real. Life Healing on Instagram, Facebook, and TikTok, browse Kelly's Amazon storefront, and sign up for updates from Kelly Day, LMHC.",
       },
-      { property: "og:title", content: "Links | Real. Life Healing" },
+      { property: "og:title", content: "Connect with Kelly Day, LMHC | Real. Life Healing" },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/links` }],
   }),

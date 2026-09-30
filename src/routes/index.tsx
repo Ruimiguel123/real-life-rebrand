@@ -20,7 +20,9 @@ export const Route = createFileRoute("/")({
     meta: [
       { property: "og:url", content: `${SITE_URL}/` },
       {
-        title: `Real. Life Healing | Online Therapy in ${LICENSED_STATES_SHORT}`,
+        // Kept under 65 characters so Google shows it whole. The five
+        // states live in the description, the page text and JSON-LD.
+        title: "Real. Life Healing | Online Therapy with Kelly Day, LMHC",
       },
       {
         name: "description",
