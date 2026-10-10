@@ -9,7 +9,8 @@ export const Route = createFileRoute("/lets-get-real")({
   head: () => ({
     meta: [
       { property: "og:url", content: `${SITE_URL}/lets-get-real` },
-      { title: "Let's Get Real | Real. Life Healing" },
+      // Says what the page is, not only its name. 65 characters, the limit.
+      { title: "Let's Get Real: Therapy & Mental Health Blog | Real. Life Healing" },
       {
         name: "description",
         content: `Honest notes on therapy and healing from Kelly Day, LMHC, plus practice updates and mental health resources for ${LICENSED_STATES_TEXT}.`,

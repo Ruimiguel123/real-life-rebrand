@@ -20,9 +20,11 @@ export const Route = createFileRoute("/")({
     meta: [
       { property: "og:url", content: `${SITE_URL}/` },
       {
-        // Kept under 65 characters so Google shows it whole. The five
-        // states live in the description, the page text and JSON-LD.
-        title: "Real. Life Healing | Online Therapy with Kelly Day, LMHC",
+        // Leads with what people search for (service + home state), then
+        // Kelly's name, then the brand. 64 characters with "Indiana"; keep
+        // it at 65 or under so Google shows it whole. All five states stay
+        // in the description, og:title, the page text and JSON-LD.
+        title: `Online Therapy in ${HOME_STATE} | Kelly Day, LMHC | Real. Life Healing`,
       },
       {
         name: "description",

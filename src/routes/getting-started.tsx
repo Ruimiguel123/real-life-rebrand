@@ -62,7 +62,10 @@ export const Route = createFileRoute("/getting-started")({
     meta: [
       { property: "og:url", content: `${SITE_URL}/getting-started` },
       {
-        title: "Getting Started with Online Therapy | Real. Life Healing",
+        // Matches "how to start online therapy" and "online therapy with
+        // insurance" searches; this page holds the steps and the insurance
+        // FAQ. 63 characters.
+        title: "How to Start Online Therapy with Insurance | Real. Life Healing",
       },
       {
         name: "description",
