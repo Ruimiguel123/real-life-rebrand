@@ -2,12 +2,12 @@
 //
 // SITE_VERSION is the date and time of the update zip this code came from.
 // Bump it in EVERY update so it matches the zip's name
-// (rlh-<topic>_2026-10-10_1854.zip -> "2026-10-10 18:54"). After a push, open
+// (rlh-<topic>_2026-10-10_1905.zip -> "2026-10-10 19:05"). After a push, open
 // https://reallifehealing.care/version to confirm the deploy landed.
 //
 // The page is plain text, never cached and noindex. It shows nothing but
 // this stamp; do not add client, subscriber or configuration details here.
-export const SITE_VERSION = "2026-10-10 18:54";
+export const SITE_VERSION = "2026-10-10 19:05";
 
 /** Answers GET /version. Returns null for every other request. */
 export function serveVersion(request: Request): Response | null {
