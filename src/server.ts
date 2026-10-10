@@ -5,6 +5,7 @@ import { renderErrorPage } from "./lib/error-page";
 import { withSecurityHeaders } from "./security-headers";
 import { setEnv, resolveEnv } from "./blog/env";
 import { handleBackendRequest } from "./blog/admin";
+import { serveVersion } from "./lib/version";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -58,6 +59,11 @@ export default {
     // being committed and deployed. Both are kept — _headers covers /assets/*
     // and the crawl files, this covers the pages.
     try {
+      // /version: which build is live. Answered before anything else so it
+      // still works when the database or the page render is broken.
+      const version = serveVersion(request);
+      if (version) return withSecurityHeaders(version);
+
       // Cloudflare bindings (D1, R2, Access vars) for the blog. Nitro does
       // not pass `env` through to this entry, so resolveEnv() finds the
       // bindings where Nitro leaves them. Stashed so TanStack server
